@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1527">
+<title>AI Motion Piano v8.1 | 계이름 등록곡 플레이리스트</title>
+<meta name="description" content="AI 손동작 인식 피아노. 계이름·음 길이가 등록된 13곡의 기본 플레이리스트 및 최대 200음 악보. 곡 선택·연주·악보 등록·녹음 지원.">
+<style>
+:root{font-family:Pretendard,'Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;color:#f1f7ff;background:#071426;color-scheme:dark;--aqua:#6de1ff;--white-gap:clamp(4px,.44vw,8px)}*{box-sizing:border-box}body{margin:0;overflow:hidden}button,select,input{font:inherit}button{cursor:pointer}button:disabled{cursor:wait;opacity:.6}.hidden{display:none!important}.ar-app{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;isolation:isolate;min-height:390px;background:radial-gradient(circle at 50% 35%,#264967,#071426 75%)}.camera-video,.camera-overlay,.camera-dimmer,.camera-placeholder{position:absolute;inset:0;width:100%;height:100%}.camera-video{z-index:0;object-fit:cover;transform:scaleX(-1)}.camera-overlay{z-index:3;pointer-events:none}.camera-dimmer{z-index:1;pointer-events:none;background:linear-gradient(to bottom,#03101cb0,transparent 38%,#06132615 60%,#061324dd)}.camera-placeholder{z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;text-align:center;background:linear-gradient(140deg,#182c45,#081528);padding-bottom:100px;font-size:16px}.camera-placeholder .big-emoji{font-size:48px}.camera-placeholder small{color:#aed0e2}.keyboard-shell{position:absolute;z-index:8;left:50%;top:8px;transform:translateX(-50%);width:min(1480px,calc(100% - 24px))}.keyboard-meta{display:flex;justify-content:space-between;align-items:center;padding:0 9px 6px;gap:8px;font-size:12px;letter-spacing:.08em;font-weight:800;text-shadow:0 2px 12px #000}.keyboard-meta #keyPlayed{text-align:right;font-weight:500;letter-spacing:0;max-width:30vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.keyboard-box{border:1px solid #aacfe399;border-radius:13px;background:#071b30bb;padding:9px 8px 12px;backdrop-filter:blur(7px);box-shadow:0 15px 40px #0008}.keyboard{height:clamp(220px,35vh,345px);position:relative;touch-action:none;user-select:none}.white-keys{display:flex;width:100%;height:100%;gap:var(--white-gap)}.piano-key{position:relative;border:0;touch-action:none;user-select:none;-webkit-user-select:none}.white-key{width:0;flex:1 1 0;background:linear-gradient(#f9fcffed,#dce6efea);border:1px solid #8aa6bd;border-bottom:7px solid #9eaebec7;border-radius:0 0 8px 8px;box-shadow:inset 2px 0 #fff7}.white-key.pressed{background:linear-gradient(#7eecfbd8,#76b2f9e0);border-bottom-color:#6da7cf}.black-key{position:absolute;z-index:3;top:0;width:4.5%;height:43%;border:2px solid #101829;border-radius:0 0 7px 7px;background:linear-gradient(105deg,#344257,#111a2b);box-shadow:2px 4px 9px #000b,0 0 0 1px #a6c9e455}.black-key.pressed{background:linear-gradient(#59d9ef,#326bbb)}.key-label{position:absolute;bottom:12px;left:0;right:0;color:#22364c;font-size:clamp(12px,1.6vw,22px);font-weight:900;text-align:center;pointer-events:none}.keyboard.hide-labels .key-label{display:none}.hand-cursors{position:absolute;inset:0;pointer-events:none;z-index:14}.finger-dot{position:absolute;width:25px;height:25px;border-radius:50%;transform:translate(-50%,-50%);border:3px solid #bbf7ff;background:#51c6ec50;box-shadow:0 0 0 7px #58c8ff45,0 0 18px #16d7f7}.finger-dot.closed{border-color:#ffe3a3;background:#f9c55875;box-shadow:0 0 0 8px #ffc84b30,0 0 25px #eccc66}.finger-dot.on-key{outline:2px solid #3dfccc;outline-offset:10px}.hud{position:absolute;z-index:7;top:calc(clamp(220px,35vh,345px) + 46px);left:50%;transform:translateX(-50%);width:min(900px,calc(100% - 30px));display:flex;flex-direction:column;align-items:center;gap:9px;pointer-events:none;text-align:center;text-shadow:0 2px 14px #020814}.hud-heading{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap}.hud-heading h1{font-size:clamp(18px,2.1vw,28px);margin:0;letter-spacing:-.5px}.hud-heading>span{font-size:12px;border-radius:7px;padding:5px 9px;background:#0a2942c9}.hud-heading #highScore{color:#ffe398}.view{display:flex;flex-direction:column;align-items:center;gap:9px;width:100%}.small-caption{font-size:13px}.practice-target{font-size:clamp(50px,9vh,97px);font-weight:900;color:#87dfff;line-height:1.15}.progress{width:min(600px,100%);height:8px;background:#7d9eae55;border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#63d8ff,#9883fe);border-radius:inherit;transition:width .2s}.track-info{display:flex;gap:10px;justify-content:center;align-items:center;color:#e6f3ff;font-size:12px}.black-hint{background:#2c2a50e0;color:#ffe698;border-radius:7px;padding:4px 9px}.note-ribbon{width:100%;display:flex;gap:6px;overflow:auto;scrollbar-width:none;padding:5px 2px;justify-content:center}.note-ribbon::-webkit-scrollbar{display:none}.note-chip{background:#122e49d9;border:1px solid #91c3eb88;border-radius:11px;min-width:clamp(36px,4.7vw,54px);height:clamp(42px,6.5vh,62px);display:grid;place-items:center;font-size:clamp(13px,1.7vw,22px);font-weight:900}.note-chip.done{background:#1b6859cc;color:#baffdb}.note-chip.current{background:linear-gradient(125deg,#37b4eb,#6554d4);border:2px solid #eff8ff;box-shadow:0 0 17px #67baff80}.song-stats{width:min(650px,100%);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;font-weight:800}.rec-indicator{color:#ffbac0}.free-view{padding:14px 0;font-weight:700}.free-timer{display:flex;align-items:center;gap:10px;border-radius:12px;background:#081a31cb;border:1px solid #9bdafa7a;padding:10px 18px}.free-timer b{font-size:26px;font-variant-numeric:tabular-nums}.free-timer small{font-size:11px}#recordDot{width:11px;height:11px;background:#8096a8;border-radius:50%}#recordDot.recording{background:#ff6775;box-shadow:0 0 0 6px #ff68632b;animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.4}}.feedback{max-width:100%;padding:8px 14px;border:1px solid #619fca8c;border-radius:50px;background:#081a2ce0;font-size:clamp(11px,1.3vw,15px);font-weight:700;backdrop-filter:blur(6px)}.feedback.success{color:#a7ffd6;border-color:#69ba96}.feedback.error{color:#ffd4ce;border-color:#df908c}.status-row{position:absolute;bottom:89px;right:15px;z-index:25;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}.status-chip{font-size:11px;font-weight:700;padding:8px 11px;border-radius:99px;background:#071b30da;color:#abffda;border:1px solid #5ea98e}.status-chip.warn{color:#ffe6aa;border-color:#b98e47}.toolbar{position:absolute;bottom:10px;left:10px;right:10px;height:68px;z-index:31;display:flex;align-items:center;gap:6px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;white-space:nowrap;background:#0b182ded;border:1px solid #a2cce77d;border-radius:17px;padding:8px;backdrop-filter:blur(16px);box-shadow:0 13px 48px #000a}.toolbar::-webkit-scrollbar{display:none}.toolbar-groups,.context-actions{display:flex;align-items:center;gap:6px;flex:none}.group-btn,.tool-btn{flex:none;min-height:44px;padding:9px 12px;color:#e7f5ff;font-size:13px;font-weight:800;border:1px solid #60738a;border-radius:11px;background:#20304c}.group-btn.active{background:linear-gradient(115deg,#258cca,#6857b8);border-color:#b3d5ff}.tool-btn.primary{background:linear-gradient(115deg,#3a84db,#765ce9);border-color:#9ab2ff}.tool-btn.green{background:linear-gradient(100deg,#14747b,#1b918f);border-color:#78dbce}.record-enabled{color:#ffd4db;border-color:#b55d77;background:#593547}.record-disabled{color:#b5c4d8;background:#1c273b}.tool-separator{height:31px;width:1px;background:#8297b465;flex:none;margin:0 2px}.settings{position:absolute;right:14px;bottom:88px;z-index:45;width:min(310px,calc(100% - 28px));background:#0c223bee;border:1px solid #9dbed777;border-radius:15px;padding:17px;box-shadow:0 15px 35px #000b;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(15px)}.settings header{display:flex;justify-content:space-between}.settings header button{color:white;background:transparent;border:0;font-size:19px}.settings label{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#e7f4ff;font-size:12px}.settings select{background:#1d3858;border:1px solid #6b86a2;border-radius:8px;padding:6px;color:white;max-width:190px}.settings label:has(input[type=range]){flex-wrap:wrap}.settings input[type=range]{flex:1;width:100%;accent-color:#75d6ff}.settings .check{justify-content:flex-start}.settings .check input{accent-color:#71c7fb}.settings-song{display:flex;flex-direction:column;gap:12px}.settings>p{margin:0;font-size:11px;color:#a1bbd4}.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#020713bc;backdrop-filter:blur(10px);padding:20px}.modal-inner{position:relative;width:min(750px,100%);max-height:89vh;overflow:auto;background:linear-gradient(145deg,#223753,#0f2038);border:1px solid #7d9fc599;border-radius:21px;box-shadow:0 25px 70px #000b;padding:27px}.modal-x{position:absolute;right:14px;top:12px;font-size:19px;color:#e8f1ff;background:transparent;border:0;z-index:1}.modal h2{font-size:26px;margin:0 28px 6px 0}.modal p{line-height:1.7;color:#bcd2e6;font-size:13px}.playlist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0}.playlist-card{display:flex;flex-direction:column;align-items:stretch;gap:5px;background:#1a3553d9;border:1px solid #567494;border-radius:14px;padding:15px;text-align:left;color:white;min-height:126px}.playlist-card:hover,.playlist-card:focus-visible{border-color:#95d8ff;background:#234872}.playlist-card strong{font-size:19px}.playlist-card small{font-size:12px;color:#b9cce1;line-height:1.5}.playlist-card .song-range{font-size:11px;color:#ffdca1}.modal-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:18px 0 0}.modal-button{padding:11px 15px;border:1px solid #6a86aa;color:white;border-radius:11px;background:#2d4a72;font-weight:750}.modal-button.primary{background:linear-gradient(110deg,#388ed7,#7465d6)}.score-num{font-weight:900;text-align:center;font-size:clamp(54px,8vw,87px);color:#ffe08e}.score-title{text-align:center;font-size:24px;font-weight:900}.score-stars{text-align:center;font-size:27px;margin:12px}.field{display:flex;flex-direction:column;gap:6px;margin:16px 0}.field input{width:100%;background:#0b1d33;border:1px solid #6682a0;color:white;border-radius:10px;padding:13px}.recordings{display:flex;flex-direction:column;gap:8px;margin:15px 0}.recording-row{display:flex;align-items:center;gap:11px;background:#182d49;padding:11px;border-radius:11px;border:1px solid #486582}.recording-row .record-details{flex:1;min-width:0}.recording-row small{display:block;color:#abc3d9;margin-top:3px}.recording-row .modal-button{padding:7px;font-size:11px}.qr-box{display:grid;place-items:center;gap:9px;margin:18px 0}.qr-holder{background:white;padding:12px;border-radius:10px;min-height:230px;min-width:230px;display:grid;place-items:center}.toast{position:fixed;z-index:120;bottom:95px;left:50%;transform:translateX(-50%);background:#264a68;color:white;border:1px solid #82c4eb;border-radius:10px;padding:12px 18px;font-weight:700;box-shadow:0 10px 35px #000b;max-width:calc(100vw - 24px);text-align:center}@media(max-width:760px){:root{--white-gap:clamp(2px,.48vw,5px)}.keyboard-shell{width:calc(100% - 12px);top:5px}.keyboard-box{padding:5px 4px 8px}.keyboard{height:clamp(169px,29vh,265px)}.hud{top:calc(clamp(169px,29vh,265px) + 43px);width:calc(100% - 16px)}.hud-heading{gap:5px}.hud-heading h1{font-size:17px}.hud-heading>span{font-size:10px;padding:4px 6px}.note-ribbon{justify-content:flex-start}.note-chip{min-width:39px;font-size:14px}.song-stats{font-size:11px}.status-row{right:7px;bottom:81px}.toolbar{height:62px;left:5px;right:5px;bottom:7px}.tool-btn,.group-btn{min-height:42px;padding:8px 9px;font-size:12px}.key-label{font-size:11px}.playlist-grid{grid-template-columns:1fr}.playlist-card{min-height:104px}.modal-inner{padding:23px 14px}.keyboard-meta #keyPlayed{display:none}}@media(max-height:530px){.keyboard{height:clamp(110px,26vh,150px)}.hud{top:calc(clamp(110px,26vh,150px) + 35px);gap:4px}.practice-target{font-size:45px}.note-chip{height:38px}.status-row{bottom:72px}.toolbar{height:57px}.feedback{padding:5px 11px}}
+/* Camera startup hint stays below the note-scoring HUD instead of obscuring it. */
+.camera-placeholder{justify-content:flex-end;padding-bottom:130px;gap:4px;background:radial-gradient(circle at 50% 35%,#233f5d,#071426)}
+.camera-placeholder .big-emoji{font-size:32px}
+.camera-placeholder>span:not(.big-emoji),.camera-placeholder>small{border-radius:50px;background:#102944b8;padding:5px 13px;font-size:12px}
+@media(max-height:580px){.camera-placeholder{padding-bottom:82px}.camera-placeholder .big-emoji{display:none}}
+
+/* v5 catalogue and authorized-score editor */
+.genre-filters{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 5px}
+.genre-filter{padding:7px 11px;border:1px solid #6481a1;background:#1c344c;border-radius:999px;color:#d4e8fa;font-size:12px;font-weight:700}
+.genre-filter.active{background:#337ca3;border-color:#a7e9fd;color:white}
+.playlist-card.unlicensed-sample{border-color:#8b7952}
+.playlist-card .song-status{font-size:11px;display:inline-block;align-self:start;color:#a9f1cc;background:#153d3b98;padding:5px 7px;border-radius:6px}
+.playlist-card.unlicensed-sample .song-status{color:#ffe3a9;background:#69542787}
+.category-count{font-size:14px;color:#bfe4f6;font-weight:600}
+.playlist-legal{border-top:1px solid #425979;margin:15px 0 0;padding-top:12px}
+.track-info{flex-wrap:wrap}
+.score-source{font-size:11px;color:#b5edce;background:#133c36ca;border:1px solid #418776;border-radius:6px;padding:4px 8px;font-weight:800}
+.score-source.is-exercise{color:#ffe19e;background:#473920de;border-color:#ad8544}
+.score-help{background:#152f49;border:1px solid #456887;padding:12px;border-radius:11px;display:flex;flex-direction:column;gap:8px;font-size:12px}
+.score-help code{font-family:monospace;color:#d0ecff;background:#0d2236;padding:4px 6px;border-radius:5px}
+.score-help small{color:#b5cede;font-size:11px}
+.editor-label{display:block;font-size:13px;font-weight:800;margin:12px 0 6px}
+.score-number,#scoreText{width:100%;border-radius:10px;background:#0e263e;color:#f5f8ff;border:1px solid #6b91b1;padding:12px}
+#scoreText{min-height:126px;resize:vertical;line-height:1.8;letter-spacing:.2px;font-family:monospace}
+.editor-confirm{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:12px;color:#dce8f2}
+.editor-confirm input{accent-color:#6dd8ff}
+.editor-error{color:#ffb8b3!important;font-weight:750;min-height:16px}
+
+/* v5.1 readable full score viewer. */
+.note-score-grid{display:flex;flex-direction:column;gap:8px;max-height:45vh;overflow-y:auto;margin:16px 0;padding:8px;border:1px solid #547392;border-radius:12px;background:#122741;}
+.note-score-line{display:flex;gap:7px;flex-wrap:wrap;padding:7px;border-bottom:1px solid #47617f55;}
+.note-score-line span{border:1px solid #547a9b;background:#1a3a5b;padding:6px 9px;border-radius:8px;font-weight:700;font-size:13px;}
+.score-view-status{color:#f7d69c!important;font-weight:800;}
+.tool-btn:disabled{cursor:not-allowed;opacity:.65;}
+
+/* v6: integrated song management and CRUD */
+.playlist-item{min-width:0;display:flex;flex-direction:column;border-radius:15px;overflow:hidden;background:#17314fdc;border:1px solid #567494}
+.playlist-item .playlist-card{border:0;border-radius:0;flex:1;width:100%;min-height:110px}
+.playlist-item-actions{display:flex;gap:7px;padding:8px 11px 10px;border-top:1px solid #45617e9f}
+.playlist-item-actions button{flex:1;border:1px solid #6b88a7;background:#244461;color:#e4f2ff;border-radius:8px;font-size:12px;font-weight:800;padding:8px;cursor:pointer}
+.playlist-item-actions button:hover{background:#326289}
+.playlist-item-actions [data-delete-song]:hover{background:#723e49}
+.manage-head-actions{justify-content:flex-start;margin:12px 0;align-items:center}
+.manager-filters{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
+.manager-filters label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:750;color:#d9edfc}
+.manager-filters input,.manager-filters select,.song-form-grid input,.song-form-grid select,#songFormDescription{color:#eff7ff;background:#112842;border:1px solid #7692ae;border-radius:9px;padding:10px;min-width:0;font:inherit}
+.manager-filters input{width:min(230px,54vw)}
+.manager-count,.manager-hint{font-size:12px;color:#b7cde0}
+.manager-list{display:flex;flex-direction:column;gap:7px;max-height:39vh;overflow-y:auto;padding:5px 2px}
+.manager-song-row{display:flex;gap:12px;align-items:center;border:1px solid #496784;border-radius:12px;background:#162e48;padding:11px}
+.manager-song-details{min-width:0;flex:1}
+.manager-song-details strong{display:block;white-space:normal;overflow-wrap:anywhere;font-size:14px}
+.manager-song-details small{display:block;margin-top:4px;font-size:11px;color:#b6cede;line-height:1.5}
+.manager-song-actions{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.manager-song-actions .modal-button{padding:7px 10px;font-size:12px}
+.modal-button.danger{border-color:#a45c68;color:#ffe1e0;background:#5f3442}
+.restore-heading{font-size:15px;margin:19px 0 8px}
+.restore-list{display:flex;gap:6px;flex-wrap:wrap}
+.restore-list .modal-button{padding:7px 10px;font-size:12px}
+.song-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 13px;margin:14px 0}
+.song-form-grid .editor-label,.modal .editor-label{display:flex;flex-direction:column;gap:6px;margin:6px 0 10px}
+.song-form-grid .editor-label input,.song-form-grid .editor-label select{width:100%;box-sizing:border-box}
+#songFormDescription{width:100%}
+#songFormNotes{width:100%;min-height:165px;padding:12px;background:#0e263e;color:#f5f8ff;border:1px solid #6b91b1;border-radius:10px;resize:vertical;line-height:1.7;font:13px ui-monospace,Consolas,monospace}
+.field-muted{font-size:11px;color:#b5c5dc;font-weight:400}
+.file-button{cursor:pointer;display:inline-block;align-self:center}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:600px){.song-form-grid{grid-template-columns:1fr}.manager-song-row{flex-wrap:wrap}.manager-song-actions{width:100%;justify-content:flex-end}.playlist-item .playlist-card{min-height:100px}}
+
+/* v7: 23-key keyboard, A3-G5 (14 white keys, 9 black keys) */
+:root { --white-gap:clamp(3px,.35vw,6px); }
+.keyboard .black-key { width:3.8%; }
+.keyboard .white-key .key-label { font-size:clamp(11px,1.35vw,19px); }
+@media(max-width:760px){
+  :root { --white-gap:clamp(1px,.30vw,3px); }
+  .keyboard .white-key .key-label { font-size:clamp(9px,2.1vw,12px);bottom:8px; }
+}
+
+</style>
+<script>
+// Optional: connect an independently deployed upload/share server for WAV QR sharing.
+// Do not put API secrets here: this file is public on GitHub Pages.
+window.MOTION_PIANO_CONFIG={
+  shareApiBase:'',
+  turnstileSiteKey:'',
+};
+
+</script>
+<script>
+/* Verified melody pitch sequences; beat lengths are simplified for booth play.
+ * Existing scores stay within C4–E5, while the piano now supports A3–G5 (23 keys).
+ */
+(() => {
+  const make = (id, title, icon, group, bpm, lines, source, description, options={}) => {
+    const notes=[], beats=[], phraseEnds=[];
+    for(const line of lines){
+      for(let j=0;j<line.length;j++){
+        const item=line[j];
+        if(typeof item==='string'){notes.push(item);beats.push(j===line.length-1?2:1);}
+        else {notes.push(item[0]);beats.push(item[1]);}
+      }
+      phraseEnds.push(notes.length-1);
+    }
+    return {id,title,icon,group,bpm,notes,beats,phraseEnds,source,description,...options};
+  };
+  const S=[
+    make('plane','비행기','✈️','basic',105,[
+      ['E4','D4','C4','D4'],['E4','E4',['E4',2]],['D4','D4',['D4',2]],['E4','G4',['G4',2]],
+      ['E4','D4','C4','D4'],['E4','E4','E4','E4'],['D4','D4','E4','D4'],[['C4',4]]
+    ],'https://onlinepianokeyboard.com/learn/first-song','메리의 작은 양 선율로 연주하는 친숙한 동요'),
+    make('school','학교 종','🔔','basic',110,[
+      ['G4','G4','A4','A4','G4','G4',['E4',2]],
+      ['G4','G4','E4','E4',['D4',2]],
+      ['G4','G4','A4','A4','G4','G4',['E4',2]],
+      ['G4','E4','D4','E4',['C4',3]]
+    ],'https://cottu.tistory.com/7','「학교 종이 땡땡땡」 친숙한 학교 동요'),
+    make('butterfly','나비야','🦋','basic',108,[
+      ['G4','E4',['E4',2]],['F4','D4',['D4',2]],['C4','D4','E4','F4','G4','G4',['G4',2]],
+      ['G4','E4','E4',['E4',2]],['F4','D4',['D4',2]],['C4','E4','G4',['G4',2]],['E4','E4',['E4',2]]
+    ],'https://cottu.tistory.com/8','국내 동요 악보의 「솔·미·미」로 시작하는 선율'),
+    make('star','작은 별','⭐','melody',98,[
+      ['C4','C4','G4','G4','A4','A4',['G4',2]],
+      ['F4','F4','E4','E4','D4','D4',['C4',2]],
+      ['G4','G4','F4','F4','E4','E4',['D4',2]],
+      ['G4','G4','F4','F4','E4','E4',['D4',2]],
+      ['C4','C4','G4','G4','A4','A4',['G4',2]],
+      ['F4','F4','E4','E4','D4','D4',['C4',2]]
+    ],'https://piano.org/songs/easy/twinkle-twinkle-little-star/','다장조 전곡 멜로디 · 42개 음'),
+    make('london','런던 브리지','🌉','melody',106,[
+      ['G4',['A4',.5],'G4','F4'],['E4','F4',['G4',2]],
+      ['D4','E4',['F4',2]],['E4','F4',['G4',2]],
+      ['G4',['A4',.5],'G4','F4'],['E4','F4',['G4',2]],
+      ['D4',['G4',2]],['E4',['C4',3]]
+    ],'https://onlinepianokeyboard.com/songs/london-bridge-is-falling-down','다장조 편곡 · 마지막 음은 도'),
+    make('ode','환희의 송가','🎼','melody',100,[
+      ['E4','E4','F4','G4'],['G4','F4','E4','D4'],['C4','C4','D4','E4'],[['E4',1.5],['D4',.5],['D4',2]],
+      ['E4','E4','F4','G4'],['G4','F4','E4','D4'],['C4','C4','D4','E4'],[['D4',1.5],['C4',.5],['C4',2]]
+    ],'https://piano-play.still-coding.com/en/library/ode/','베토벤 교향곡 제9번 주제 · 다장조 앞부분'),
+    make('jingle','징글벨','🔔','special',105,[
+      ['E4','E4',['E4',2]],['E4','E4',['E4',2]],
+      ['E4','G4','C4','D4',['E4',2]],
+      ['F4','F4','F4','F4','F4'],
+      ['E4','E4','E4','E4','E4'],
+      ['D4','D4','E4','D4',['G4',2]]
+    ],'https://pianodemy.com/pieces/jingle-bells/','익숙한 후렴 부분 · 동일 음 연속 입력 연습'),
+    make('birthday','생일 축하합니다','🎂','special',94,[
+      [['C4',.5],['C4',.5],'D4','C4','F4',['E4',2]],
+      [['C4',.5],['C4',.5],'D4','C4','G4',['F4',2]],
+      [['C4',.5],['C4',.5],'C5','A4','F4','E4',['D4',2]],
+      [['A#4',.5],['A#4',.5],'A4','F4','G4',['F4',2]]
+    ],'https://www.capotastomusic.com/piano-sheet-music/piano-tabs/happy-birthday-to-you.pdf','바장조 편곡 · 검은 건반 시♭(B♭) 사용',{keyName:'F장조',blackKey:true})
+  ];
+
+  // The following 21 recent songs have catalogue metadata only. We provide an
+  // ORIGINAL, clearly labeled skill drill instead of copying their protected
+  // melody. Teachers can register authorized score notes in the web app.
+  const NEW_TRACKS=[
+    // [id, title, artist/source, difficulty, icon, genre, bpm]
+    ['jaws','죠스 메인 테마','영화 죠스','basic','🦈','영화 OST',86],
+    ['shrimp','새우깡 CM송','농심 광고','basic','🍤','CM송',108],
+    ['bravo','부라보콘 CM송','빙그레 광고','basic','🍦','CM송',102],
+    ['apt','APT.','로제 & 브루노 마스','basic','🎤','K-POP',110],
+    ['snowman','눈사람 만들래?','겨울왕국','melody','⛄','애니메이션 OST',94],
+    ['sanpo','산책 (さんぽ)','이웃집 토토로','melody','🌿','애니메이션 OST',108],
+    ['sodapop','Soda Pop','케이팝 데몬 헌터스','melody','🥤','영화 OST',110],
+    ['zoo','Zoo','주토피아 2 · Shakira','melody','🦊','영화 OST',112],
+    ['magnetic','Magnetic','ILLIT','melody','🧲','K-POP',109],
+    ['dynamite','Dynamite','BTS','melody','💫','K-POP',108],
+    ['butter','Butter','BTS','melody','🧈','K-POP',109],
+    ['signal','신호등','이무진','melody','🚦','K-POP',98],
+    ['oronamin','오로나민C CM송','오로나민C 광고','melody','⚡','CM송',114],
+    ['chocopie','초코파이 情 CM송','오리온 광고','melody','🍫','CM송',92],
+    ['himart','하이마트 CM송','하이마트 광고','melody','🏬','CM송',100],
+    ['itsme','It’s Me','ILLIT','melody','✨','K-POP',110],
+    ['golden','Golden','케이팝 데몬 헌터스','special','🥇','영화 OST',102],
+    ['mario','슈퍼 마리오 메인 테마','슈퍼 마리오 브라더스','special','🍄','게임 OST',110],
+    ['hedwig','Hedwig’s Theme','해리 포터','special','🪄','영화 OST',95],
+    ['day6','한 페이지가 될 수 있게','DAY6','special','📖','K-POP',104],
+    ['redred','REDRED','CORTIS','special','🔴','K-POP',113],
+  ];
+  const POOLS={
+    basic:['C4','D4','E4','F4','G4','A4'],
+    melody:['C4','D4','E4','F4','G4','A4','B4','C5'],
+    special:['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F#4','A#4'],
+  };
+  // Deliberately original educational exercises. NEVER identify them as an
+  // original composition's transcribed melody in the UI or exported data.
+  function exerciseFor(id,level){
+    const pool=POOLS[level],len=level==='basic'?12:level==='melody'?16:20;
+    let seed=0;
+    for(const ch of id)seed=((seed*37+ch.charCodeAt(0))>>>0);
+    let at=seed%pool.length;
+    const notes=[],beats=[];
+    const shape=[1,1,-2,2,-1,-1,2,-2,1,-1,1,-1,2,-2,1,0];
+    for(let i=0;i<len;i++){
+      const delta=shape[(i+seed)%shape.length];
+      at=Math.max(0,Math.min(pool.length-1,at+delta));
+      notes.push(pool[at]);
+      beats.push(i%4===3?2:(level==='special'&&i%5===2?.5:1));
+    }
+    return {notes,beats};
+  }
+  for(const [id,title,artist,group,icon,genre,bpm] of NEW_TRACKS){
+    const drill=exerciseFor(id,group);
+    S.push({id,title,icon,artist,genre,group,bpm,
+      notes:drill.notes,beats:drill.beats,phraseEnds:[],
+      description:`${artist} · 원곡 악보 미등록 · 창작 연습 선율`,
+      keyName:'창작 연습',demoOnly:true,scoreStatus:'exercise',
+      source:'',blackKey:drill.notes.some(n=>n.includes('#'))});
+  }
+  const C=[
+    {id:'basic',title:'기초 도전',icon:'🎓',description:'초급 · 단순한 계이름과 반복 패턴',songIds:['practice','plane','school','butterfly','star','london','ode','jaws','shrimp','bravo','apt']},
+    {id:'melody',title:'멜로디 도전',icon:'🎼',description:'중급 · 다양한 음 이동과 리듬',songIds:['jingle','birthday','snowman','sanpo','sodapop','zoo','magnetic','dynamite','butter','signal','oronamin','chocopie','himart','itsme']},
+    {id:'special',title:'특별 도전',icon:'🏆',description:'상급 · 빠른 음 전환, 검은 건반 도전',songIds:['golden','mario','hedwig','day6','redred']},
+    {id:'free',title:'자유곡',icon:'🎹',description:'자유 연주 · 녹음 · QR 공유',songIds:[]}
+  ];
+  for(const song of S){
+    if(!song.scoreStatus) song.scoreStatus='reference';
+    song.group=C.find(cat=>cat.songIds.includes(song.id))?.id||song.group;
+    if(!song.genre) song.genre='동요·전통·고전';
+  }
+  window.PIANO_SONGS = Object.fromEntries(S.map(s=>[s.id,s]));
+  window.PIANO_CATEGORIES=C;
+})();
+
+// Source: user-provided 2026-10-23 song catalogue backup; no invented notes.
+window.PIANO_DEFAULT_CATALOG={"version":1,"changed":{"chocopie":{"id":"chocopie","title":"초코파이 情","genre":"CM송","artist":"오리온 광고","icon":"🍫","group":"melody","bpm":92,"description":"오리온 광고","notes":["G4","G4","G4","G4","A4","B4","B4","A4","E4","E4","E4","E4","E4","F4","G4","G4","F4","F4","E4","D4","C5","B4","G4","A3","A3","D4","E4","F4","E4","D4","C4"],"beats":[1,1,1,1,1,1,2,1,3,1,1,1,1,1,1,3,2,0.5,0.5,1,1,1,2,0.5,1,1,1,1,1,1,3],"source":"","phraseEnds":[],"scoreStatus":"registered","demoOnly":false,"blackKey":false,"keyName":"직접 등록한 악보"},"sodapop":{"id":"sodapop","title":"Soda Pop","genre":"영화 OST","artist":"케이팝 데몬 헌터스","icon":"🥤","group":"melody","bpm":110,"description":"케이팝 데몬 헌터스 · 원곡 악보 미등록 · 창작 연습 선율","notes":["B4","D5","B4","A4","G4","E4","B4","D5","B4","A4","G4","E4","B4","B4","G4","G4","A4","B4","B4","G4","G4","G4","B4","D5","B4","A4","G4","E4","B4","D5","B4","A4","G4","E4","B4","B4","G4","G4","A4","B4","B4","G4","G4","G4"],"beats":[0.5,0.5,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5,0.5,0.5,1,0.5,0.5,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5,0.5,0.5,1],"source":"","phraseEnds":[],"scoreStatus":"registered","demoOnly":false,"blackKey":false,"keyName":"직접 등록한 악보"},"hedwig":{"id":"hedwig","title":"해리포터(Hedwig’s Theme)","genre":"영화 OST","artist":"해리 포터","icon":"🪄","group":"special","bpm":95,"description":"해리포터(Hedwig’s Theme)","notes":["E4","A4","C5","B4","A4","E5","D5","B4","A4","C5","B4","G4","A#4","E4","E4","A4","C5","B4","A4","E5","G5","F#5","F5","D5","F5","E5","D#5","E4","C5","A4"],"beats":[1,1.5,0.5,1,2,1,3,3,1.5,0.5,1,2,1,4,1,1.5,0.5,1,2,1,2,1,2,1,1.5,0.5,1,2,1,4],"source":"","phraseEnds":[],"scoreStatus":"registered","demoOnly":false,"blackKey":true,"keyName":"직접 등록한 악보"}},"added":{"custom-e2b5801f30d4408b8d44dbfe07358291":{"id":"custom-e2b5801f30d4408b8d44dbfe07358291","title":"학교 가는 길1","genre":"동요·전통·고전","artist":"김광민","icon":"🎵","group":"special","bpm":100,"description":"학교 가는 길1","notes":["G4","G4","G4","F4","E4","F4","G4","B4","C5","A4","B4","C5","G4","B4","C5","F4","F4","E4","D4","E4","F4","G4","G4","C4","D4","E4","F4","E4","D4","C4","D4","E4","F4","G4","B4","B4","A4","G4","E4","E4","D4","C4","D4","G4","G4","G4","F4","E4","F4","G4","B4","C5","A4","B4","C5","G4","B4","C5","F4","F4","E4","D4","E4","F4","G4","G4","C4","D4","E4","F4","E4","D4","C4","D4","E4","F4","G4","B4","B4","A4","G4","E4","E4","D4","C4","D4"],"beats":[1.5,0.5,0.5,0.5,0.5,0.5,3,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,1,1,0.5,0.5,0.5,0.5,0.5,0.5,1,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5,2,1.5,0.5,0.5,0.5,0.5,0.5,3,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,0.5,0.5,1,1,1,0.5,0.5,0.5,0.5,0.5,0.5,1,0.5,0.5,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5,2],"source":"","phraseEnds":[],"scoreStatus":"registered","demoOnly":false,"blackKey":false,"keyName":"직접 등록한 악보"},"custom-9b13d6f444f44b3c9881e75b22937b22":{"id":"custom-9b13d6f444f44b3c9881e75b22937b22","title":"학교 가는 길2","genre":"동요·전통·고전","artist":"김광민","icon":"🎵","group":"special","bpm":100,"description":"학교 가는 길2","notes":["C5","C5","B4","A4","A4","G4","G4","G4","G4","G4","B4","C5","A4","A4","A4","A4","E5","D5","C5","E5","C5","C5","G4","A4","A4","B4","C5","D5","G4","C5","C5","B4","A4","A4","G4","G4","G4","G4","G4","B4","C5","A4","A4","A4","A4","E5","D5","C5","E5","C5","C5","G4","A4","A4","B4","B4","C5"],"beats":[1.5,0.5,1,1,1,1,1.5,0.5,1,1,1,1,3,1,1,1,0.75,0.75,0.75,1,1,1,1,1.5,0.5,1,1,3,1,1.5,0.5,1,1,1,1,1.5,0.5,1,1,1,1,3,1,1,1,0.75,0.75,0.75,1,1,1,1,1.5,0.5,1,1,3],"source":"","phraseEnds":[],"scoreStatus":"registered","demoOnly":false,"blackKey":false,"keyName":"직접 등록한 악보"}},"hidden":["butter","sanpo","snowman","zoo","magnetic","dynamite","signal","oronamin","himart","itsme","redred","day6","mario","golden","jaws","shrimp","bravo","apt"]};
+
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+<main class="ar-app" id="arApp">
+  <video class="camera-video" id="cameraVideo" autoplay muted playsinline aria-label="웹캠 영상"></video>
+  <canvas class="camera-overlay" id="cameraOverlay" aria-hidden="true"></canvas>
+  <div class="camera-dimmer"></div>
+  <div id="cameraPlaceholder" class="camera-placeholder"><span class="big-emoji">✋</span><span>웹캠 화면에 손을 비춰보세요</span><small>하단 <b>카메라 켜기</b> 선택</small></div>
+
+  <section class="keyboard-shell" aria-label="가상 피아노 23개 건반">
+    <div class="keyboard-meta"><strong>PIANO</strong><span>A3 – G5 · 23 KEYS</span><span id="keyPlayed">손을 건반으로 이동하세요</span></div>
+    <div class="keyboard-box"><div class="keyboard" id="keyboard" role="group" aria-label="가상 피아노">
+      <div class="white-keys" id="whiteKeys"></div><div class="black-keys" id="blackKeys"></div>
+    </div></div>
+  </section>
+  <div id="handCursors" class="hand-cursors" aria-hidden="true"></div>
+
+  <section class="hud" aria-live="polite">
+    <div class="hud-heading"><span id="categoryLabel">기초 도전</span><h1 id="songHeading">계이름 연습</h1><span id="highScore">정답 0 / 10</span></div>
+    <div id="practiceView" class="view practice-view">
+      <span class="small-caption">다음 계이름의 건반을 찾아보세요</span>
+      <div id="practiceTarget" class="practice-target">솔</div>
+      <div class="progress"><div id="practiceBar" class="progress-fill"></div></div>
+    </div>
+    <div id="songView" class="view song-view hidden">
+      <div class="track-info"><span id="songDesc">계이름을 따라 연주해 보세요</span><span id="blackHint" class="black-hint hidden">검은 건반 안내</span><span id="scoreSource" class="score-source">기본 제공 선율</span></div>
+      <div id="noteRibbon" class="note-ribbon"></div>
+      <div class="song-stats"><span id="progressText">0 / 0음</span><span id="comboText">콤보 0</span><span id="liveScore">도전 준비</span><span id="recordIndicator" class="rec-indicator hidden">● 녹음 <b id="songRecordTime">00:00</b></span></div>
+      <div class="progress"><div id="songBar" class="progress-fill"></div></div>
+    </div>
+    <div id="freeView" class="view free-view hidden"><span>마음껏 연주하고 나만의 음악을 남겨보세요</span><div class="free-timer"><span id="recordDot"></span><b id="recordTime">00:00</b><small>최대 90초</small></div></div>
+    <div id="feedback" class="feedback">아래에서 기초 도전을 선택해 보세요.</div>
+  </section>
+
+  <div class="status-row" aria-live="off"><span id="audioStatus" class="status-chip warn">● 소리 준비 중</span><span id="handStatus" class="status-chip warn">● 카메라 대기</span></div>
+
+  <nav class="toolbar" aria-label="피아노 조작 메뉴">
+    <div id="groupButtons" class="toolbar-groups">
+      <button class="group-btn active" data-category="basic">🎓 기초 도전</button>
+      <button class="group-btn" data-category="melody">🎼 멜로디 도전</button>
+      <button class="group-btn" data-category="special">🏆 특별 도전</button>
+      <button class="group-btn" data-category="free">🎹 자유곡</button>
+    </div>
+    <button id="manageSongs" class="tool-btn" title="곡 추가·수정·삭제 및 기본곡 복원">🗂 곡 관리</button>
+    <span class="tool-separator"></span>
+    <div id="practiceActions" class="context-actions"><button id="nextPractice" class="tool-btn">↻ 새 문제</button></div>
+    <div id="songActions" class="context-actions hidden">
+      <button id="chooseSong" class="tool-btn">♫ 곡 선택</button><button id="editScoreBtn" class="tool-btn" title="노래 제목·계이름·음 길이·난이도 변경">✏️ 곡 수정</button>
+      <button id="viewScoreBtn" class="tool-btn">♬ 계이름·음 길이</button>
+      <button id="previewBtn" class="tool-btn">▶ 미리듣기</button>
+      <button id="challengeBtn" class="tool-btn primary">🎯 도전 시작</button>
+      <button id="songRecBtn" class="tool-btn record-enabled" aria-pressed="true">🔴 녹음 ON</button>
+      <button id="songLibrary" class="tool-btn">▤ 보관함</button>
+    </div>
+    <div id="freeActions" class="context-actions hidden"><button id="freeRecBtn" class="tool-btn record-enabled">● 녹음 시작</button><button id="freeLibrary" class="tool-btn">▤ 보관함</button></div>
+    <span class="tool-separator"></span>
+    <button id="audioBtn" class="tool-btn">🔊 소리 활성화</button>
+    <button id="cameraBtn" class="tool-btn green">📷 카메라 켜기</button>
+    <button id="settingsBtn" class="tool-btn" aria-label="설정 열기" aria-expanded="false">⚙️</button>
+    <button id="fullscreenBtn" class="tool-btn" aria-label="전체 화면 전환">⛶</button>
+  </nav>
+
+  <aside id="settings" class="settings hidden" aria-label="설정">
+    <header><strong>⚙️ 피아노 설정</strong><button id="closeSettings" aria-label="설정 닫기">✕</button></header>
+    <label>손동작<select id="gestureMode"><option value="pinch">엄지·검지 모으기</option><option value="middle">검지·중지 모으기</option><option value="hover">손가락 가리키기</option></select></label>
+    <label>연주 방식<select id="playStyle"><option value="continuous">연속 연주 (추천)</option><option value="locked">한 음 고정</option></select></label>
+    <label>반응 속도<select id="reaction"><option value="stable">안정적</option><option value="fast">빠르게</option></select></label>
+    <label>소리 크기 <span id="volumeText">76%</span><input id="volume" type="range" min="0" max="100" value="76"></label>
+    <div id="songSettings" class="settings-song hidden"><label>연주 난이도<select id="difficulty"><option value="easy">쉬운 연주 (음 순서)</option><option value="rhythm">리듬 도전 (박자 포함)</option></select></label><label>연주 속도<select id="speed"><option value="0.7">천천히 70%</option><option value="1" selected>보통 100%</option><option value="1.2">빠르게 120%</option></select></label></div>
+    <label class="check"><input type="checkbox" id="showNoteNames" checked>흰 건반 계이름 표시</label>
+    <label class="check"><input type="checkbox" id="autoPractice" checked>연습 정답 후 자동 다음 문제</label>
+    <button id="audioTest" class="tool-btn">🔊 도 음향 테스트</button>
+    <p>카메라 영상은 기기 안에서 처리합니다.<br>피아노 음원: <a href="https://archive.org/details/SalamanderGrandPianoV3" target="_blank" rel="noopener noreferrer">Salamander Grand Piano / Alexander Holm</a> (CC BY 3.0)</p>
+  </aside>
+</main>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="곡 선택 및 연주 결과"><div class="modal-inner"><button id="closeModal" class="modal-x" aria-label="닫기">✕</button><div id="modalBody"></div></div></div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+/* AI Motion Piano v4 — AR song library and camera-controlled piano.
+ * The camera is processed locally. Audio-file QR sharing requires an optional server.
+ */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const songs=window.PIANO_SONGS||{};
+  const categories=window.PIANO_CATEGORIES||[];
+  const config=window.MOTION_PIANO_CONFIG||{};
+  const MAX_SCORE_NOTES=200;
+  const MAX_SONG_SECONDS=240; // default tempo; 200 quarter notes at 55 BPM fit
+  const MAX_FREE_RECORD_SECONDS=90;
+  const MAX_SONG_RECORD_SECONDS=360; // includes slow (70%) playback and pauses
+  const MAX_WAV_SECONDS=365;
+  // Keep a pristine catalogue entry so locally registered scores can be reset.
+  const baseSongs=Object.fromEntries(Object.entries(songs).map(([id,x])=>[id,{...x,notes:[...x.notes],beats:[...x.beats]}]));
+  const SCORE_STORE_PREFIX='amp-v5-score-';
+  // A3 (낮은 라) ~ G5 (높은 솔): 14 white + 9 black = 23 keys.
+  // Old C4~E5 melodies remain playable without modification.
+  const noteAliases={
+    '낮은라':'A3','낮은시':'B3',
+    '도':'C4','레':'D4','미':'E4','파':'F4','솔':'G4','라':'A4','시':'B4',
+    '높은도':'C5','높은레':'D5','높은미':'E5','높은파':'F5','높은솔':'G5',
+    '낮은라#':'A#3','낮은라♯':'A#3','낮은시♭':'A#3',
+    '도#':'C#4','레#':'D#4','파#':'F#4','솔#':'G#4','라#':'A#4',
+    '도♯':'C#4','레♯':'D#4','파♯':'F#4','솔♯':'G#4','라♯':'A#4',
+    '시♭':'A#4',
+    '높은도#':'C#5','높은레#':'D#5','높은파#':'F#5',
+    '높은도♯':'C#5','높은레♯':'D#5','높은파♯':'F#5'
+  };
+  const WHITE=[
+    ['A3','낮은 라'],['B3','낮은 시'],
+    ['C4','도'],['D4','레'],['E4','미'],['F4','파'],['G4','솔'],['A4','라'],['B4','시'],
+    ['C5','높은 도'],['D5','높은 레'],['E5','높은 미'],['F5','높은 파'],['G5','높은 솔']
+  ];
+  // Each black key follows the white key at index after.
+  const BLACK=[
+    ['A#3',0],['C#4',2],['D#4',3],['F#4',5],['G#4',6],['A#4',7],
+    ['C#5',9],['D#5',10],['F#5',12]
+  ];
+  const NOTES=[...WHITE.map(x=>x[0]),...BLACK.map(x=>x[0])];
+  const LABELS=Object.fromEntries(WHITE.map(x=>x));
+  const BLACK_LABELS={
+    'A#3':'낮은 시♭','C#4':'도♯','D#4':'레♯','F#4':'파♯','G#4':'솔♯','A#4':'시♭',
+    'C#5':'높은 도♯','D#5':'높은 레♯','F#5':'높은 파♯'
+  };
+  const displayKeyLabel=label=>label.replace(/^높은 /,'↑').replace(/^낮은 /,'↓');
+  const NAMES=Object.fromEntries(WHITE.map(([n,v])=>[n,displayKeyLabel(v)]));
+  const noteName=n=>NAMES[n]||BLACK_LABELS[n]||n;
+  const clamp=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+  const fmt=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+  const escapeHtml=str=>String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const readStorage=(k,d='')=>{try{return localStorage.getItem(k)??d;}catch{return d;}};
+  const writeStorage=(k,v)=>{try{localStorage.setItem(k,String(v));}catch{}};
+  function validateScore(notes,beats,bpm){
+    if(!Array.isArray(notes)||!Array.isArray(beats)||notes.length!==beats.length||notes.length<4||notes.length>MAX_SCORE_NOTES)throw Error(`4~${MAX_SCORE_NOTES}개의 음을 입력하세요.`);
+    if(!Number.isFinite(bpm)||bpm<55||bpm>165)throw Error('빠르기는 55~165 BPM으로 입력하세요.');
+    for(let i=0;i<notes.length;i++){
+      if(!NOTES.includes(notes[i]))throw Error(`${i+1}번째 음(${notes[i]})은 A3~G5 범위를 벗어납니다.`);
+      if(!Number.isFinite(beats[i])||beats[i]<.25||beats[i]>4||Math.round(beats[i]*4)!==beats[i]*4)throw Error(`${i+1}번째 음 길이는 0.25~4박의 0.25박 단위로 입력하세요.`);
+    }
+    const seconds=beats.reduce((sum,n)=>sum+n,0)*60/bpm;
+    if(seconds>MAX_SONG_SECONDS)throw Error(`곡 전체 길이는 기본 빠르기 기준 ${MAX_SONG_SECONDS}초 이하여야 합니다. (현재 ${seconds.toFixed(1)}초)`);
+  }
+  function parseScoreText(text){
+    const chunks=String(text).trim().split(/[\s,，|]+/).filter(Boolean);
+    const notes=[],beats=[];
+    for(const chunk of chunks){
+      const pair=chunk.split(/[:：]/);
+      if(pair.length>2)throw Error(`음표 ${chunk}의 형식을 확인하세요.`);
+      const raw=pair[0].trim(),alias=raw.replace(/\s/g,'');
+      const note=noteAliases[alias]||raw.toUpperCase();
+      const duration=pair.length===2?Number(pair[1]):1;
+      notes.push(note);beats.push(duration);
+    }
+    return {notes,beats};
+  }
+  function scoreSignature(song){
+    let h=2166136261;
+    for(const c of song.notes.join('|')+'/'+song.beats.join('|')+'/'+song.bpm){h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;}
+    return h.toString(36);
+  }
+  function bestKeyFor(song){return song.scoreStatus==='reference'?'amp-best-'+song.id:`amp-best-${song.scoreStatus}-${song.id}-${scoreSignature(song)}`;}
+  function setScore(song,data){
+    validateScore(data.notes,data.beats,Number(data.bpm));
+    Object.assign(song,{notes:[...data.notes],beats:[...data.beats],bpm:Number(data.bpm),
+      scoreStatus:'registered',demoOnly:false,blackKey:data.notes.some(n=>n.includes('#')),
+      keyName:'내가 등록한 악보',description:`${song.artist||song.title} · 직접 등록한 계이름`,phraseEnds:[]});
+  }
+  function loadCustomScores(){
+    for(const song of Object.values(songs)){
+      const raw=readStorage(SCORE_STORE_PREFIX+song.id,'');if(!raw)continue;
+      try{setScore(song,JSON.parse(raw));}
+      catch(e){console.warn('저장된 곡 악보를 불러오지 못했습니다.',song.id,e);}
+    }
+  }
+  loadCustomScores();
+
+  // Song library CRUD (v6). Only authored/edited metadata and scores are stored:
+  // the built-in catalogue in songs.js remains untouched and can be restored.
+  const CATALOG_KEY='amp-v6-song-catalog-v1';
+  const DIFFICULTY_IDS=['basic','melody','special'];
+  const initialCategoryIds=Object.fromEntries(categories.map(c=>[c.id,[...c.songIds]]));
+  let catalog={version:1,changed:{},added:{},hidden:[]};
+  const bundledCatalog=window.PIANO_DEFAULT_CATALOG||null;
+  const canExportInline=[...document.querySelectorAll('script:not([src])')].some(n=>n.textContent.includes('window.PIANO_DEFAULT_CATALOG='));
+  const cloneSong=s=>({...s,notes:[...(s.notes||[])],beats:[...(s.beats||[])],phraseEnds:[...(s.phraseEnds||[])]});
+  const blankCatalog=()=>({version:1,changed:{},added:{},hidden:[]});
+  const isSongId=id=>typeof id==='string' && /^[a-zA-Z0-9_-]{1,100}$/.test(id) && id!=='practice';
+  function validateSongRecord(song,id,custom=false){
+    if(!song||!isSongId(id)||!DIFFICULTY_IDS.includes(song.group))throw Error('곡 분류 또는 ID가 올바르지 않습니다.');
+    if(typeof song.title!=='string'||!song.title.trim()||song.title.length>60)throw Error('노래 제목을 1~60자로 입력하세요.');
+    if(typeof song.genre!=='string'||!song.genre.trim()||song.genre.length>40)throw Error('장르는 1~40자로 입력하세요.');
+    if(typeof song.artist!=='string'||song.artist.length>70)throw Error('가수·출처는 70자 이하로 입력하세요.');
+    if(typeof song.description!=='string'||song.description.length>220)throw Error('설명은 220자 이하로 입력하세요.');
+    if(typeof song.icon!=='string'||song.icon.length>12)throw Error('아이콘을 짧게 입력하세요.');
+    if(!Number.isFinite(song.bpm)||song.bpm<55||song.bpm>165)throw Error('빠르기는 55~165 BPM이어야 합니다.');
+    if(!['reference','registered','exercise'].includes(song.scoreStatus))throw Error('악보 상태가 올바르지 않습니다.');
+    if(!Array.isArray(song.notes)||!Array.isArray(song.beats)||song.notes.length!==song.beats.length)throw Error('계이름과 음 길이의 개수가 다릅니다.');
+    if(song.scoreStatus==='exercise'){
+      if(custom&&song.notes.length)throw Error('등록 대기곡은 계이름을 비워 주세요.');
+    }else validateScore(song.notes,song.beats,song.bpm);
+    if(custom && song.scoreStatus==='reference')throw Error('새로 추가한 곡은 직접 등록 악보만 사용할 수 있습니다.');
+  }
+  function cleanStoredCatalog(raw){
+    if(!raw||typeof raw!=='object'||raw.version!==1)throw Error('지원하지 않는 곡 목록 백업입니다.');
+    const result=blankCatalog();
+    for(const [id,x] of Object.entries(raw.changed||{})){
+      if(!Object.hasOwn(baseSongs,id))throw Error('알 수 없는 기본곡: '+id);
+      validateSongRecord(x,id,false);result.changed[id]=cloneSong({...x,id});
+    }
+    for(const [id,x] of Object.entries(raw.added||{})){
+      if(!/^custom-[a-z0-9-]{8,90}$/i.test(id)||Object.hasOwn(baseSongs,id))throw Error('추가곡 ID가 올바르지 않습니다.');
+      validateSongRecord(x,id,true);result.added[id]=cloneSong({...x,id});
+    }
+    if(Object.keys(result.added).length>300)throw Error('추가곡은 최대 300개까지 관리할 수 있습니다.');
+    if(!Array.isArray(raw.hidden))throw Error('삭제곡 목록의 형식이 올바르지 않습니다.');
+    result.hidden=[...new Set(raw.hidden)];
+    if(result.hidden.some(id=>!Object.hasOwn(baseSongs,id)))throw Error('삭제곡 목록에 잘못된 ID가 있습니다.');
+    return result;
+  }
+  function refreshCategories(){
+    for(const cat of categories){
+      if(cat.id==='free'){cat.songIds=[];continue;}
+      cat.songIds=initialCategoryIds[cat.id].filter(id=>id==='practice'||(songs[id]&&songs[id].group===cat.id));
+    }
+    for(const x of Object.values(songs)){
+      const cat=categories.find(c=>c.id===x.group);
+      if(cat&&!cat.songIds.includes(x.id))cat.songIds.push(x.id);
+    }
+  }
+  function refreshCatalog(){
+    Object.keys(songs).forEach(id=>delete songs[id]);
+    for(const [id,x] of Object.entries(baseSongs)){
+      songs[id]=cloneSong(x);
+      const old=readStorage(SCORE_STORE_PREFIX+id,'');
+      if(old){try{setScore(songs[id],JSON.parse(old));}catch(e){console.warn('이전 악보 데이터 오류',id,e);}}
+    }
+    for(const [id,x] of Object.entries(catalog.changed))songs[id]=cloneSong(x);
+    for(const [id,x] of Object.entries(catalog.added))songs[id]=cloneSong(x);
+    for(const id of catalog.hidden)delete songs[id];
+    refreshCategories();
+  }
+  function commitCatalog(next){
+    const checked=cleanStoredCatalog(next);
+    // Save first so quota/private-storage errors cannot partly corrupt the UI.
+    localStorage.setItem(CATALOG_KEY,JSON.stringify(checked));
+    catalog=checked;
+    refreshCatalog();
+  }
+  try{
+    // Curated backup is the default on a fresh browser, not a replacement for
+    // changes someone already saved in their own browser.
+    if(bundledCatalog)catalog=cleanStoredCatalog(bundledCatalog);
+  }catch(err){console.error('내장 플레이리스트가 올바르지 않습니다.',err);}
+  try{
+    const raw=readStorage(CATALOG_KEY,'');
+    if(raw)catalog=cleanStoredCatalog(JSON.parse(raw));
+  }catch(err){console.warn('저장된 곡 관리 데이터를 사용할 수 없습니다.',err);}
+  refreshCatalog();
+
+  let toastHandle=null;
+  function toast(msg){const el=$('toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toastHandle);toastHandle=setTimeout(()=>el.classList.add('hidden'),3400);}
+  function feedback(text,tone=''){const el=$('feedback');el.textContent=text;el.className='feedback '+tone;}
+  function modal(html){$('modalBody').innerHTML=html;$('modal').classList.remove('hidden');}
+  function closeModal(){$('modal').classList.add('hidden');}
+  $('closeModal').onclick=closeModal;
+  $('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();showSettings(false);}});
+
+  function midi(note){const m=/^([A-G])(#?)(\d)$/.exec(note);if(!m)return 60;
+    return (Number(m[3])+1)*12+({C:0,D:2,E:4,F:5,G:7,A:9,B:11})[m[1]]+(m[2]?1:0);
+  }
+  class PianoAudio {
+    constructor(){this.ctx=null;this.master=null;this.voices=new Map();this.samples=new Map();this.sampleRequest=null;}
+    async ensure(){
+      if(!this.ctx){
+        const Ctx=window.AudioContext||window.webkitAudioContext;
+        if(!Ctx)throw Error('이 브라우저에서는 Web Audio API가 지원되지 않습니다.');
+        this.ctx=new Ctx();this.master=this.ctx.createGain();
+        this.master.gain.value=Number($('volume').value)/100*.78;this.master.connect(this.ctx.destination);
+        this.ctx.onstatechange=()=>this.updateStatus();
+        this.loadSamples();
+      }
+      if(this.ctx.state!=='running'){
+        try{await Promise.race([this.ctx.resume(),new Promise(r=>setTimeout(r,500))]);}catch(e){console.warn(e);}
+      }
+      this.updateStatus();
+      if(this.ctx.state!=='running')throw Error('브라우저에서 소리가 차단되어 있습니다. 소리 활성화를 눌러 주세요.');
+      return this.ctx;
+    }
+    loadSamples(){
+      if(this.sampleRequest)return;
+      const sources={A3:'A3.mp3',C4:'C4.mp3','D#4':'Ds4.mp3','F#4':'Fs4.mp3',A4:'A4.mp3',C5:'C5.mp3','D#5':'Ds5.mp3','F#5':'Fs5.mp3'};
+      const base='https://tonejs.github.io/audio/salamander/';
+      this.sampleRequest=Promise.all(Object.entries(sources).map(async ([note,name])=>{
+        try{const r=await fetch(base+name,{signal:AbortSignal.timeout(6500)});if(!r.ok)throw Error(String(r.status));
+          this.samples.set(note,await this.ctx.decodeAudioData(await r.arrayBuffer()));}
+        catch(e){console.warn('샘플 로드 실패, 기본 피아노 음색 사용',note,e);}
+      }));
+    }
+    updateStatus(){
+      const playing=this.ctx?.state==='running';
+      $('audioStatus').textContent=playing?'● 소리 준비 완료':'● 첫 터치로 소리 활성화';
+      $('audioStatus').classList.toggle('warn',!playing);
+      $('audioBtn').textContent=playing?'✓ 소리 켜짐':'🔊 소리 활성화';
+    }
+    setVolume(v){if(this.master)this.master.gain.setTargetAtTime(v/100*.78,this.ctx.currentTime,.02);}
+    closestSample(note){let best=null,diff=999;for(const [n,b] of this.samples){const d=Math.abs(midi(n)-midi(note));if(d<diff){diff=d;best={buffer:b,midi:midi(n)};}}return best;}
+    voice(context,destination,note,at,velocity=.9){
+      const gain=context.createGain();gain.gain.setValueAtTime(.00001,at);gain.gain.exponentialRampToValueAtTime(.47*velocity,at+.012);gain.connect(destination);
+      const sample=this.closestSample(note),nodes=[];
+      if(sample){const src=context.createBufferSource();src.buffer=sample.buffer;src.playbackRate.value=2**((midi(note)-sample.midi)/12);src.connect(gain);src.start(at);nodes.push(src);}
+      else{
+        const f=440*2**((midi(note)-69)/12);
+        for(const [harmonic,amp] of [[1,.65],[2,.19],[3,.10],[4,.045]]){
+          const osc=context.createOscillator(),level=context.createGain();osc.type='sine';osc.frequency.value=f*harmonic*(1+(harmonic-1)*.0005);
+          level.gain.setValueAtTime(amp,at);level.gain.setTargetAtTime(.0001,at+.05,.65/harmonic);
+          osc.connect(level);level.connect(gain);osc.start(at);nodes.push(osc);
+        }
+      }
+      return {gain,nodes};
+    }
+    press(note,id){if(!this.ctx||this.ctx.state!=='running')return false;
+      this.release(id);const voice=this.voice(this.ctx,this.master,note,this.ctx.currentTime,.90);this.voices.set(id,voice);return true;}
+    release(id){const voice=this.voices.get(id);if(!voice||!this.ctx)return;
+      const now=this.ctx.currentTime;voice.gain.gain.cancelScheduledValues(now);
+      voice.gain.gain.setValueAtTime(Math.max(.0001,voice.gain.gain.value),now);
+      voice.gain.gain.exponentialRampToValueAtTime(.0001,now+.27);
+      for(const n of voice.nodes){try{n.stop(now+.31);}catch{}}
+      this.voices.delete(id);
+    }
+    releaseAll(){for(const id of [...this.voices.keys()])this.release(id);}
+    async wav(events,duration){
+      const rate=22050,seconds=clamp(duration+.55,.25,MAX_WAV_SECONDS),frames=Math.ceil(seconds*rate);
+      const ctx=new OfflineAudioContext(1,frames,rate);const output=ctx.createGain();output.gain.value=.76;output.connect(ctx.destination);
+      for(const e of events){if(!NOTES.includes(e.note))continue;
+        const at=clamp(Number(e.start)||0,0,seconds-.1),d=clamp(Number(e.duration)||.15,.07,10);
+        const v=this.voice(ctx,output,e.note,at,.8);const end=Math.min(seconds-.01,at+d);
+        v.gain.gain.setValueAtTime(.35,at+.014);v.gain.gain.setValueAtTime(.35,end);
+        v.gain.gain.exponentialRampToValueAtTime(.0001,Math.min(seconds,end+.27));
+        for(const n of v.nodes){try{n.stop(Math.min(seconds,end+.3));}catch{}}
+      }
+      const data=(await ctx.startRendering()).getChannelData(0),buf=new ArrayBuffer(44+data.length*2),view=new DataView(buf);
+      const write=(pos,str)=>{for(let i=0;i<str.length;i++)view.setUint8(pos+i,str.charCodeAt(i));};
+      write(0,'RIFF');view.setUint32(4,36+data.length*2,true);write(8,'WAVE');write(12,'fmt ');view.setUint32(16,16,true);
+      view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,rate,true);view.setUint32(28,rate*2,true);view.setUint16(32,2,true);view.setUint16(34,16,true);
+      write(36,'data');view.setUint32(40,data.length*2,true);
+      for(let i=0;i<data.length;i++){const x=clamp(data[i],-1,1);view.setInt16(44+i*2,x<0?x*32768:x*32767,true);}
+      return new Blob([buf],{type:'audio/wav'});
+    }
+  }
+  const audio=new PianoAudio();
+  const keyEls=new Map();
+  for(const [note,label] of WHITE){
+    const b=document.createElement('button');b.className='piano-key white-key';b.dataset.note=note;
+    b.type='button';b.setAttribute('aria-label',label+' '+note);
+    b.innerHTML=`<span class="key-label">${escapeHtml(displayKeyLabel(label))}</span>`;
+    $('whiteKeys').appendChild(b);keyEls.set(note,b);
+  }
+  for(const [note,after] of BLACK){
+    const b=document.createElement('button');b.className='piano-key black-key';b.dataset.note=note;
+    b.type='button';b.setAttribute('aria-label',noteName(note));
+    // Initial approximate position; corrected from actual white-key edges below.
+    b.style.left=(((after+1)*100/WHITE.length)-1.9)+'%';
+    $('blackKeys').appendChild(b);keyEls.set(note,b);
+  }
+  function alignBlackKeys(){
+    const keyboard=$('keyboard').getBoundingClientRect();if(!keyboard.width)return;
+    for(const [note,after] of BLACK){
+      const leftWhite=keyEls.get(WHITE[after][0]).getBoundingClientRect();
+      const rightWhite=keyEls.get(WHITE[after+1][0]).getBoundingClientRect();
+      const black=keyEls.get(note);
+      const blackWidth=black.getBoundingClientRect().width;
+      const midpoint=(leftWhite.right+rightWhite.left)/2;
+      black.style.left=((midpoint-keyboard.left-blackWidth/2)/keyboard.width*100)+'%';
+    }
+  }
+  requestAnimationFrame(alignBlackKeys);
+  window.addEventListener('resize',alignBlackKeys);
+
+  const inputs=new Map(),generations=new Map(),pending=new Map(),pressedByNote=new Map();
+  const timers=new Set();
+  const later=(fn,ms)=>{const t=setTimeout(()=>{timers.delete(t);fn();},ms);timers.add(t);return t;};
+  function clearTimers(){for(const t of timers)clearTimeout(t);timers.clear();}
+  const nextGen=id=>{const v=(generations.get(id)||0)+1;generations.set(id,v);return v;};
+  function illuminate(note,on){const b=keyEls.get(note);if(!b)return;
+    if(on)b.classList.add('pressed');else if(![...inputs.values()].includes(note))b.classList.remove('pressed');
+  }
+  let mode='practice',category='basic',songId='plane',challenge=null,practice={hits:0,tries:0,target:'G4',locked:false};
+  let recording=null,recordTimer=null,previewing=false,finishTimer=null;
+  let recordSongs=readStorage('amp-song-record','true')!=='false';
+
+  async function press(note,id,source='user'){
+    if(!NOTES.includes(note))return false;
+    if(inputs.has(id)&&inputs.get(id)===note)return true;
+    if(inputs.has(id))release(id);
+    const gen=nextGen(id),modeAtRequest=mode;
+    pending.set(id,gen);
+    try{await audio.ensure();}catch(e){if(pending.get(id)===gen)pending.delete(id);toast(e.message);return false;}
+    if(generations.get(id)!==gen||modeAtRequest!==mode){if(pending.get(id)===gen)pending.delete(id);return false;}
+    if(!audio.press(note,id)){if(pending.get(id)===gen)pending.delete(id);toast('오디오가 준비되지 않았습니다.');return false;}
+    if(pending.get(id)===gen)pending.delete(id);inputs.set(id,note);illuminate(note,true);$('keyPlayed').textContent=`♫ ${noteName(note)} (${note})`;
+    const now=performance.now();
+    if(source==='user'&&recording){recording.active.set(id,{note,start:(now-recording.startedAt)/1000});}
+    if(source==='user')judge(note,id,now);
+    return true;
+  }
+  function release(id){nextGen(id);pending.delete(id);const note=inputs.get(id);if(!note)return;
+    inputs.delete(id);audio.release(id);illuminate(note,false);
+    if(recording?.active.has(id)){
+      const ev=recording.active.get(id);ev.duration=clamp((performance.now()-recording.startedAt)/1000-ev.start,.07,10);
+      recording.events.push(ev);recording.active.delete(id);
+    }
+    if(challenge?.running&&challenge.byInput?.has(id)){
+      const v=challenge.byInput.get(id);v.durationMs=performance.now()-v.started;
+      challenge.byInput.delete(id);
+      if(challenge.index>=challenge.song.notes.length)finishChallenge();
+    }
+  }
+  function releaseAll(){for(const id of new Set([...inputs.keys(),...pending.keys()]))release(id);audio.releaseAll();}
+  const whiteKeyCodes=['KeyZ','KeyX','KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote','BracketLeft'];
+  keyEls.forEach((button,note)=>{
+    button.addEventListener('pointerdown',e=>{e.preventDefault();try{button.setPointerCapture(e.pointerId);}catch{}press(note,'pointer:'+e.pointerId);});
+    for(const type of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(type,e=>release('pointer:'+e.pointerId));
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.repeat||e.altKey||e.ctrlKey||e.metaKey||['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+    const idx=whiteKeyCodes.indexOf(e.code);if(idx<0)return;e.preventDefault();press(WHITE[idx][0],'key:'+e.code);
+  });
+  document.addEventListener('keyup',e=>{if(whiteKeyCodes.includes(e.code))release('key:'+e.code);});
+  window.addEventListener('blur',releaseAll);
+  const unlock=()=>audio.ensure().catch(()=>{});
+  document.addEventListener('pointerdown',unlock,{capture:true});
+  document.addEventListener('keydown',unlock,{capture:true});
+  audio.ensure().catch(()=>{});
+  $('audioBtn').onclick=async()=>{try{await audio.ensure();toast('피아노 소리 활성화 완료');}catch(e){toast(e.message);}};
+  $('audioTest').onclick=async()=>{try{await audio.ensure();if(audio.press('C4','test')){illuminate('C4',true);later(()=>{audio.release('test');illuminate('C4',false);},600);toast('도 음향 테스트 중입니다.');}}catch(e){toast(e.message);}};
+  $('volume').oninput=e=>{audio.setVolume(Number(e.target.value));$('volumeText').textContent=e.target.value+'%';};
+  $('showNoteNames').onchange=e=>$('keyboard').classList.toggle('hide-labels',!e.target.checked);
+  $('fullscreenBtn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{toast('이 브라우저에서는 전체 화면을 사용할 수 없습니다.');}};
+  document.addEventListener('fullscreenchange',()=>{$('fullscreenBtn').textContent=document.fullscreenElement?'▣':'⛶';});
+
+  function setCategoryActive(){document.querySelectorAll('[data-category]').forEach(b=>b.classList.toggle('active',b.dataset.category===category));}
+  function updateHeader(){
+    $('categoryLabel').textContent=categories.find(c=>c.id===category)?.title||'기초 도전';
+    $('practiceView').classList.toggle('hidden',mode!=='practice');
+    $('songView').classList.toggle('hidden',mode!=='song');
+    $('freeView').classList.toggle('hidden',mode!=='free');
+    $('practiceActions').classList.toggle('hidden',mode!=='practice');
+    $('songActions').classList.toggle('hidden',mode!=='song');
+    $('freeActions').classList.toggle('hidden',mode!=='free');
+    $('songSettings').classList.toggle('hidden',mode!=='song');
+    $('songHeading').textContent=mode==='practice'?'계이름 연습':mode==='free'?'자유 연주':(songs[songId]?.title||'곡을 선택해 주세요');
+    $('songRecBtn').textContent=recordSongs?'🔴 녹음 ON':'⚪ 녹음 OFF';
+    $('songRecBtn').classList.toggle('record-disabled',!recordSongs);
+    $('songRecBtn').setAttribute('aria-pressed',String(recordSongs));
+    setCategoryActive();
+    if(mode==='song'){
+      const song=songs[songId];
+      $('songDesc').textContent=song.description;
+      const scoreLabel=song.scoreStatus==='exercise'?'⛔ 계이름 악보 미등록 · 미리듣기 불가':song.scoreStatus==='registered'?'✓ 직접 등록한 악보':'✓ 기본 제공 간이 악보 · 박자 단순화';
+      $('scoreSource').textContent=scoreLabel;
+      $('scoreSource').classList.toggle('is-exercise',song.scoreStatus==='exercise');
+      $('editScoreBtn').textContent='✏️ 곡 수정';
+      $('blackHint').classList.toggle('hidden',!song.blackKey);
+      $('blackHint').textContent=song.notes.includes('A#4')?'시♭ = 검은 건반 A♯':'♯ 검은 건반 음 포함';
+      $('highScore').textContent='최고 '+(Number(readStorage(bestKeyFor(song),'0'))||0)+'점';
+    }else $('highScore').textContent=mode==='practice'?'정답 '+practice.hits+' / 10':'🎙 녹음 가능';
+  }
+  function changeMode(next,id,cat){
+    if(recording){stopRecord(false);toast('이전 녹음을 종료했습니다.');}
+    clearTimers();releaseAll();resetHandInputs();previewing=false;
+    challenge=null;mode=next;category=cat||category;
+    if(id)songId=id;
+    $('challengeBtn').disabled=false;$('challengeBtn').textContent='🎯 도전 시작';
+    $('previewBtn').textContent='▶ 미리듣기';$('recordIndicator').classList.add('hidden');
+    updateHeader();
+    if(mode==='practice')resetPractice();else if(mode==='song')resetSong();else feedback('🎹 자유롭게 연주한 뒤 녹음으로 남겨보세요.');
+  }
+  function openGroup(which){
+    if(which==='free'){changeMode('free',null,'free');return;}
+    const c=categories.find(c=>c.id===which);if(!c)return;
+    const genres=[...new Set(c.songIds.filter(id=>id!=='practice'&&songs[id]).map(id=>songs[id].genre||'기타'))];
+    const filterButtons=['전체',...genres].map((g,i)=>`<button type="button" class="genre-filter ${i===0?'active':''}" data-genre="${escapeHtml(g)}">${escapeHtml(g)}</button>`).join('');
+    const cards=c.songIds.map(id=>{
+      const item=id==='practice'?{title:'계이름 연습',icon:'🎓',description:'계이름 10문제 맞히기 · 제한시간 없음',genre:'동요·전통·고전'}:songs[id];
+      if(!item)return '';
+      const status=id==='practice'?'기본 연습':item.scoreStatus==='exercise'?'⛔ 악보 미등록 · 등록 후 재생':item.scoreStatus==='registered'?'✓ 직접 등록한 악보':'✓ 기본 제공 간이 악보';
+      const range=id==='practice'?'자유롭게 익히기':`${item.notes.length}개 음 · ${item.genre||'기타'}`;
+      return `<div class="playlist-item" data-song-genre="${escapeHtml(item.genre)}"><button type="button" class="playlist-card ${item.scoreStatus==='exercise'?'unlicensed-sample':''}" data-pick="${id}"><strong>${escapeHtml(item.icon)} ${escapeHtml(item.title)}</strong><small>${escapeHtml(item.artist||item.description)}</small><span class="song-range">${escapeHtml(range)}</span><span class="song-status">${escapeHtml(status)}</span></button>${id==='practice'?'':`<div class="playlist-item-actions"><button type="button" data-edit-song="${id}" aria-label="${escapeHtml(item.title)} 수정">✏️ 수정</button><button type="button" data-delete-song="${id}" aria-label="${escapeHtml(item.title)} 삭제">🗑 삭제</button></div>`}</div>`;
+    }).join('');
+    modal(`<h2>${c.icon} ${c.title} <small class="category-count">${c.songIds.filter(id=>id!=='practice').length}곡</small></h2><p>${escapeHtml(c.description)} · 곡을 선택하거나 직접 수정·추가할 수 있습니다.</p><div class="modal-buttons manage-head-actions"><button class="modal-button primary" id="addSongInGroup">＋ 이 난이도에 곡 추가</button><button class="modal-button" id="openSongManager">🗂 전체 곡 관리</button></div><div class="genre-filters">${filterButtons}</div><div class="playlist-grid">${cards}</div><p class="playlist-legal">※ 기본 제공 목록은 계이름·음 길이 데이터가 있는 곡만 표시합니다. 현대곡은 등록된 악보가 있어야 미리듣기·채점을 이용할 수 있습니다. 수정 사항은 현재 브라우저에 저장됩니다.</p>`);
+    const entries=[...$('modalBody').querySelectorAll('.playlist-item')];
+    $('modalBody').querySelectorAll('[data-genre]').forEach(btn=>btn.onclick=()=>{
+      $('modalBody').querySelectorAll('[data-genre]').forEach(b=>b.classList.toggle('active',b===btn));
+      entries.forEach(card=>card.classList.toggle('hidden',btn.dataset.genre!=='전체'&&card.dataset.songGenre!==btn.dataset.genre));
+    });
+    $('addSongInGroup').onclick=()=>openSongForm(null,which);
+    $('openSongManager').onclick=()=>openSongManager(which);
+    $('modalBody').querySelectorAll('[data-pick]').forEach(btn=>btn.onclick=()=>{
+      const id=btn.dataset.pick;closeModal();changeMode(id==='practice'?'practice':'song',id==='practice'?null:id,which);
+      if(id!=='practice'&&songs[id]?.scoreStatus==='exercise')toast('계이름 악보가 미등록 상태입니다. 곡 수정을 통해 입력하세요.');
+    });
+    $('modalBody').querySelectorAll('[data-edit-song]').forEach(btn=>btn.onclick=()=>openSongForm(btn.dataset.editSong));
+    $('modalBody').querySelectorAll('[data-delete-song]').forEach(btn=>btn.onclick=()=>deleteSong(btn.dataset.deleteSong,which));
+  }
+  document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>openGroup(b.dataset.category));
+  $('chooseSong').onclick=()=>openGroup(category);
+  $('manageSongs').onclick=()=>openSongManager(category==='free'?'all':category);
+
+  function createCustomId(){
+    const suffix=crypto.randomUUID?.().replaceAll('-','') || `${Date.now().toString(36)}${Math.random().toString(36).slice(2,14)}`;
+    return 'custom-'+suffix;
+  }
+  function displayCatalogChanged(){
+    return Object.entries(baseSongs).filter(([id])=>!catalog.hidden.includes(id)&&catalog.changed[id]).length;
+  }
+  function exportSongCatalog(){
+    const payload=JSON.parse(JSON.stringify(catalog));
+    // Include legacy v5.1 registered scores, even when they were not yet edited in v6.
+    for(const [id,s] of Object.entries(songs)){
+      if(Object.hasOwn(baseSongs,id)&&s.scoreStatus==='registered'&&!payload.changed[id])payload.changed[id]=cloneSong({...s,artist:s.artist||''});
+    }
+    const content=JSON.stringify({format:'ai-motion-piano-song-catalog',...payload},null,2);
+    const blob=new Blob([content],{type:'application/json;charset=utf-8'});
+    downloadBlob(blob,'AI_Motion_Piano_곡목록_백업_'+new Date().toISOString().slice(0,10)+'.json');
+    toast('곡 목록 백업 파일을 저장했습니다.');
+  }
+  function exportCurrentPlaylistHtml(){
+    try{
+      const payload=JSON.parse(JSON.stringify(catalog));
+      for(const [id,s] of Object.entries(songs)){
+        if(Object.hasOwn(baseSongs,id)&&s.scoreStatus==='registered'&&!payload.changed[id]){
+          payload.changed[id]=cloneSong({...s,artist:s.artist||''});
+        }
+      }
+      const checked=cleanStoredCatalog(payload);
+      const doc=document.documentElement.cloneNode(true);
+      // Running application-generated nodes are recreated on boot; do not duplicate.
+      doc.querySelector('#whiteKeys')?.replaceChildren();
+      doc.querySelector('#blackKeys')?.replaceChildren();
+      doc.querySelector('#handCursors')?.replaceChildren();
+      doc.querySelector('#noteRibbon')?.replaceChildren();
+      doc.querySelector('#modalBody')?.replaceChildren();
+      doc.querySelector('#modal')?.classList.add('hidden');
+      doc.querySelector('#settings')?.classList.add('hidden');
+      doc.querySelector('#toast')?.classList.add('hidden');
+      doc.querySelector('#cameraPlaceholder')?.classList.remove('hidden');
+      if(doc.querySelector('#cameraBtn'))doc.querySelector('#cameraBtn').textContent='📷 카메라 켜기';
+      doc.querySelector('#keyboard')?.classList.remove('hide-labels');
+      // Unneeded dynamically injected JS/CSS from optional external camera tooling.
+      for(const node of doc.querySelectorAll('script[src]')){
+        if(!node.src.includes('qrcodejs@1.0.0'))node.remove();
+      }
+      for(const node of doc.querySelectorAll('input,textarea,video')){
+        if(node.tagName==='VIDEO')node.removeAttribute('src');
+      }
+      const sourceScript=[...doc.querySelectorAll('script:not([src])')].find(node=>node.textContent.includes('window.PIANO_DEFAULT_CATALOG='));
+      if(!sourceScript)throw Error('기본 플레이리스트 내장 스크립트를 찾을 수 없습니다. 단일 HTML에서 사용하세요.');
+      const lines=sourceScript.textContent.split('\n');
+      const idx=lines.findIndex(line=>line.startsWith('window.PIANO_DEFAULT_CATALOG='));
+      if(idx<0)throw Error('기본 플레이리스트 데이터가 존재하지 않습니다.');
+      const safe=JSON.stringify(checked).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');
+      lines[idx]='window.PIANO_DEFAULT_CATALOG='+safe+';';
+      sourceScript.textContent=lines.join('\n');
+      const html='<!doctype html>\n'+doc.outerHTML;
+      downloadBlob(new Blob([html],{type:'text/html;charset=utf-8'}),'AI_Motion_Piano_현재목록_기본내장.html');
+      toast('현재 곡 목록을 기본 제공 목록에 포함한 HTML 파일을 다운로드했습니다.');
+    }catch(err){toast('HTML 생성 실패: '+(err?.message||err));}
+  }
+
+  function openSongManager(initialGroup='all'){
+    const groups=[{id:'all',title:'전체'},...categories.filter(c=>DIFFICULTY_IDS.includes(c.id))];
+    modal(`<h2>🗂 노래 관리</h2><p>곡 제목·계이름·음 길이·BPM·난이도를 수정하거나 곡을 추가·삭제할 수 있습니다. <strong>변경 내용은 이 브라우저에만 저장</strong>됩니다.</p>
+      <div class="modal-buttons manage-head-actions"><button class="modal-button primary" id="managerAdd">＋ 새 노래</button><button class="modal-button" id="managerExport">↓ 백업 JSON</button>${canExportInline?'<button class="modal-button" id="managerExportHtml">↓ 현재 목록 포함 HTML</button>':''}<label class="modal-button file-button" for="managerImport">↑ 백업 가져오기</label><input type="file" id="managerImport" accept="application/json,.json" class="visually-hidden">${bundledCatalog?'<button class="modal-button" id="managerUseBundled">↻ 기본 목록 적용</button>':''}</div>
+      <div class="manager-filters"><label>난이도 <select id="managerDifficulty">${groups.map(c=>`<option value="${c.id}" ${c.id===initialGroup?'selected':''}>${escapeHtml(c.title)}</option>`).join('')}</select></label><label>곡 검색 <input id="managerQuery" placeholder="제목 또는 장르" autocomplete="off" maxlength="60"></label></div>
+      <p class="manager-count" id="managerCount"></p><div class="manager-list" id="managerList"></div>
+      <h3 class="restore-heading">삭제한 기본 제공곡 복원</h3><div id="managerRestore" class="restore-list"></div><p class="manager-hint">기본곡을 삭제해도 원본 파일은 남아 있어 복원 가능합니다. 직접 추가한 곡은 삭제 후 복구할 수 없으므로 먼저 JSON 백업을 권장합니다.</p>`);
+    $('managerAdd').onclick=()=>openSongForm(null,$('managerDifficulty').value==='all'?'basic':$('managerDifficulty').value);
+    $('managerExport').onclick=exportSongCatalog;
+    if($('managerExportHtml'))$('managerExportHtml').onclick=exportCurrentPlaylistHtml;
+    if($('managerUseBundled'))$('managerUseBundled').onclick=()=>{
+      if(!confirm('현재 브라우저의 곡 목록 수정·삭제 내역을 이 HTML에 내장된 기본 플레이리스트 내용으로 교체합니다. 먼저 JSON 백업을 저장하셨나요?'))return;
+      try{
+        commitCatalog(bundledCatalog);
+        // Previously registered legacy scores should not override the selected backup.
+        for(const id of Object.keys(baseSongs))try{localStorage.removeItem(SCORE_STORE_PREFIX+id);}catch{}
+        refreshCatalog();
+        if(mode==='song'&&!songs[songId])changeMode('practice',null,'basic');
+        else changeMode(mode,mode==='song'?songId:null,mode==='song'?songs[songId].group:category);
+        toast('기본 제공 플레이리스트를 적용했습니다.');openSongManager('all');
+      }catch(err){toast('첨부 목록 적용 실패: '+err.message);}
+    };
+    $('managerImport').onchange=async e=>{
+      const f=e.target.files?.[0];if(!f)return;
+      try{
+        if(f.size>350000)throw Error('백업 파일은 350KB 이하여야 합니다.');
+        const parsed=JSON.parse(await f.text());
+        if(parsed.format!=='ai-motion-piano-song-catalog')throw Error('AI Motion Piano 곡 목록 백업 파일이 아닙니다.');
+        const incoming=cleanStoredCatalog(parsed);
+        if(!confirm('백업을 가져오면 현재 곡 목록 수정·추가·삭제 내용이 교체됩니다. 기존 내용을 백업하셨나요?'))return;
+        commitCatalog(incoming);
+        // An old v5.1 score registration must not override the imported catalogue.
+        for(const id of Object.keys(baseSongs))try{localStorage.removeItem(SCORE_STORE_PREFIX+id);}catch{}
+        refreshCatalog();
+        if(mode==='song'&&!songs[songId])changeMode('practice',null,'basic');
+        else changeMode(mode,mode==='song'?songId:null,mode==='song'?songs[songId].group:category);
+        toast('곡 목록 백업을 가져왔습니다.');openSongManager('all');
+      }catch(err){toast('백업 가져오기 실패: '+err.message);}
+    };
+    const repaint=()=>{
+      const filter=$('managerDifficulty').value;
+      const q=$('managerQuery').value.trim().toLowerCase();
+      const items=Object.values(songs).filter(s=>(filter==='all'||s.group===filter)&&(!q||[s.title,s.artist,s.genre].join(' ').toLowerCase().includes(q)));
+      $('managerCount').textContent=`현재 ${Object.keys(songs).length}곡 · 기본곡 수정 ${displayCatalogChanged()}곡 · 직접 추가 ${Object.keys(catalog.added).length}곡 · 검색 결과 ${items.length}곡`;
+      $('managerList').innerHTML=items.length?items.map(s=>`<div class="manager-song-row"><div class="manager-song-details"><strong>${escapeHtml(s.icon)} ${escapeHtml(s.title)}</strong><small>${escapeHtml(categories.find(c=>c.id===s.group)?.title||s.group)} · ${escapeHtml(s.genre)} · ${s.scoreStatus==='exercise'?'악보 미등록':s.notes.length+'음 · '+s.bpm+' BPM'}${Object.hasOwn(catalog.added,s.id)?' · 직접 추가':''}</small></div><div class="manager-song-actions"><button class="modal-button" data-manager-edit="${s.id}">수정</button>${Object.hasOwn(baseSongs,s.id)&&catalog.changed[s.id]?`<button class="modal-button" data-manager-reset="${s.id}">복원</button>`:''}<button class="modal-button danger" data-manager-delete="${s.id}">삭제</button></div></div>`).join(''):'<p>이 조건에 맞는 곡이 없습니다.</p>';
+      $('managerRestore').innerHTML=catalog.hidden.length?catalog.hidden.map(id=>`<button class="modal-button" data-manager-restore="${id}">↻ ${escapeHtml(baseSongs[id].title)} 복원</button>`).join(''):'<p class="manager-hint">삭제된 기본곡이 없습니다.</p>';
+      $('managerList').querySelectorAll('[data-manager-edit]').forEach(b=>b.onclick=()=>openSongForm(b.dataset.managerEdit));
+      $('managerList').querySelectorAll('[data-manager-delete]').forEach(b=>b.onclick=()=>deleteSong(b.dataset.managerDelete,filter));
+      $('managerList').querySelectorAll('[data-manager-reset]').forEach(b=>b.onclick=()=>restoreDefaultSong(b.dataset.managerReset,filter));
+      $('managerRestore').querySelectorAll('[data-manager-restore]').forEach(b=>b.onclick=()=>restoreDefaultSong(b.dataset.managerRestore,filter));
+    };
+    $('managerDifficulty').onchange=repaint;$('managerQuery').oninput=repaint;repaint();
+  }
+  function openSongForm(id=null,groupHint='basic'){
+    const item=id?songs[id]:null;
+    if(id&&!item){toast('수정할 노래를 찾을 수 없습니다.');return;}
+    const isNew=!item;
+    // Never prefill an unverified automatic drill as if it were the real melody.
+    const notation=item?.scoreStatus!=='exercise'&&item ? item.notes.map((note,i)=>`${note}:${item.beats[i]}`).join(' '):'';
+    const difficulty=DIFFICULTY_IDS.includes(groupHint)?groupHint:'basic';
+    modal(`<h2>${isNew?'＋ 새로운 노래 추가':'✏️ 노래 수정'}</h2><p>곡 정보와 실제 계이름·음 길이를 수정하세요. <b>악보가 없다면 비워 두고 목록에만 추가</b>할 수 있습니다. 음원은 등록되지 않은 상태에서 재생되지 않습니다.</p>
+      <div class="song-form-grid"><label class="editor-label">노래 제목 (필수)<input id="songFormTitle" maxlength="60" value="${escapeHtml(item?.title||'')}" placeholder="예: 우리 반 노래"></label>
+      <label class="editor-label">난이도 분류<select id="songFormGroup">${categories.filter(c=>DIFFICULTY_IDS.includes(c.id)).map(c=>`<option value="${c.id}" ${(item?.group||difficulty)===c.id?'selected':''}>${escapeHtml(c.title)}</option>`).join('')}</select></label>
+      <label class="editor-label">장르<input id="songFormGenre" maxlength="40" list="songGenreList" value="${escapeHtml(item?.genre||'동요·전통·고전')}" placeholder="예: K-POP"><datalist id="songGenreList"><option value="동요·전통·고전"><option value="K-POP"><option value="영화 OST"><option value="애니메이션 OST"><option value="게임 OST"><option value="CM송"><option value="창작곡"></datalist></label>
+      <label class="editor-label">가수 또는 출처<input id="songFormArtist" maxlength="70" value="${escapeHtml(item?.artist||'')}" placeholder="선택 입력"></label>
+      <label class="editor-label">아이콘<input id="songFormIcon" maxlength="12" value="${escapeHtml(item?.icon||'🎵')}" placeholder="🎵"></label>
+      <label class="editor-label">빠르기 BPM (55~165)<input id="songFormBpm" type="number" min="55" max="165" value="${item?.bpm||100}"></label></div>
+      <label class="editor-label">곡 설명<input id="songFormDescription" maxlength="220" value="${escapeHtml(item?.description||'')}" placeholder="학생에게 안내할 한 줄 설명"></label>
+      <div class="score-help"><b>계이름 · 음 길이 입력법</b><span><code>도:1 레:1 미:0.5 솔:2</code> 또는 <code>C4:1 D4:1 E4:0.5 G4:2</code></span><small>낮은 라~높은 솔(A3~G5), 검은 건반(낮은 시♭/A#3, 높은 파♯/F#5 등), 각 음 0.25~4박, 4~200개 음, 전체 240초 이하</small></div>
+      <label class="editor-label" for="songFormNotes">계이름·음 길이 <span class="field-muted">(악보가 없으면 비워 두세요) · <strong id="songFormCount">0 / 200음</strong></span></label><textarea id="songFormNotes" rows="7" spellcheck="false" placeholder="도:1 도:1 솔:1 솔:1 라:1 라:1 솔:2">${escapeHtml(notation)}</textarea>
+      <label class="editor-confirm"><input id="songFormRights" type="checkbox"> 새로 등록하거나 수정한 악보를 사용할 권한이 있음을 확인합니다.</label><p id="songFormError" class="editor-error" role="alert"></p>
+      <div class="modal-buttons"><button id="saveSongForm" class="modal-button primary">💾 ${isNew?'노래 추가':'수정 내용 저장'}</button>${!isNew&&Object.hasOwn(baseSongs,id)?`<button id="restoreSongFromForm" class="modal-button">↻ 기본곡 복원</button>`:''}<button id="songFormCancel" class="modal-button">취소</button></div>`);
+    const updateInputCount=()=>{
+      const count=$('songFormNotes').value.trim().split(/[\s,，|]+/).filter(Boolean).length;
+      const label=$('songFormCount');label.textContent=`${count} / ${MAX_SCORE_NOTES}음`;
+      label.style.color=count>MAX_SCORE_NOTES?'#ff858b':'';
+    };
+    $('songFormNotes').addEventListener('input',updateInputCount);
+    updateInputCount();
+    $('songFormCancel').onclick=()=>openSongManager('all');
+    if($('restoreSongFromForm'))$('restoreSongFromForm').onclick=()=>restoreDefaultSong(id,'all');
+    $('saveSongForm').onclick=()=>{
+      try{
+        const title=$('songFormTitle').value.trim(),genre=$('songFormGenre').value.trim(),artist=$('songFormArtist').value.trim();
+        const icon=$('songFormIcon').value.trim()||'🎵';
+        const description=$('songFormDescription').value.trim()||`${title} · 직접 등록한 곡`;
+        const group=$('songFormGroup').value,bpm=Number($('songFormBpm').value);
+        const raw=$('songFormNotes').value.trim();
+        const parsed=raw?parseScoreText(raw):{notes:[],beats:[]};
+        const currentMusic=item&&item.scoreStatus!=='exercise';
+        const sameMusic=!!(currentMusic&&bpm===item.bpm&&JSON.stringify(parsed.notes)===JSON.stringify(item.notes)&&JSON.stringify(parsed.beats)===JSON.stringify(item.beats));
+        if(parsed.notes.length)validateScore(parsed.notes,parsed.beats,bpm);
+        else if(!Number.isFinite(bpm)||bpm<55||bpm>165)throw Error('빠르기는 55~165 BPM으로 입력하세요.');
+        if(parsed.notes.length&&!sameMusic&&!$('songFormRights').checked)throw Error('악보 사용 권한 확인을 체크해 주세요.');
+        if(Object.values(songs).some(s=>s.id!==id&&s.title.normalize('NFC').trim().toLowerCase()===title.normalize('NFC').toLowerCase()))throw Error('같은 제목의 곡이 이미 있습니다. 다른 제목을 입력해 주세요.');
+        const song={id:id||createCustomId(),title,genre,artist,icon,group,bpm,description,
+          notes:parsed.notes,beats:parsed.beats,source:item?.source||'',phraseEnds:sameMusic?[...(item.phraseEnds||[])]:[],
+          scoreStatus:parsed.notes.length?(sameMusic?item.scoreStatus:'registered'):'exercise',
+          demoOnly:!parsed.notes.length,blackKey:parsed.notes.some(n=>n.includes('#')),
+          keyName:parsed.notes.length?(sameMusic?item.keyName||'기존 편곡':'직접 등록한 악보'):'악보 미등록'};
+        validateSongRecord(song,song.id,isNew);
+        const next=JSON.parse(JSON.stringify(catalog));
+        if(isNew)next.added[song.id]=song;
+        else if(Object.hasOwn(baseSongs,id))next.changed[id]=song;
+        else next.added[id]=song;
+        commitCatalog(next);
+        closeModal();changeMode('song',song.id,group);
+        toast(isNew?'새 노래를 추가했습니다.':'곡 정보를 수정했습니다.');
+      }catch(err){$('songFormError').textContent=err.message||String(err);}
+    };
+  }
+  function deleteSong(id,returnGroup='all'){
+    const item=songs[id];if(!item)return;
+    if(!confirm(`「${item.title}」 곡을 삭제할까요?\n${Object.hasOwn(baseSongs,id)?'기본 제공곡이므로 나중에 복원할 수 있습니다.':'직접 추가한 곡은 삭제 후 되돌릴 수 없습니다. 백업을 권장합니다.'}`))return;
+    try{
+      const next=JSON.parse(JSON.stringify(catalog));
+      if(Object.hasOwn(baseSongs,id))next.hidden.push(id);
+      else delete next.added[id];
+      commitCatalog(next);
+      if(mode==='song'&&songId===id)changeMode('practice',null,'basic');
+      else if(mode==='song')changeMode('song',songId,songs[songId]?.group||'basic');
+      toast('「'+item.title+'」을(를) 목록에서 삭제했습니다.');
+      openSongManager(returnGroup);
+    }catch(err){toast('곡 삭제 실패: '+err.message);}
+  }
+  function restoreDefaultSong(id,returnGroup='all'){
+    if(!Object.hasOwn(baseSongs,id))return;
+    if(!confirm(`「${baseSongs[id].title}」을(를) 기본 상태로 복원할까요? 수정한 제목·악보·난이도는 초기화됩니다.`))return;
+    try{
+      const next=JSON.parse(JSON.stringify(catalog));
+      delete next.changed[id];next.hidden=next.hidden.filter(x=>x!==id);
+      commitCatalog(next);
+      try{localStorage.removeItem(SCORE_STORE_PREFIX+id);}catch{}
+      refreshCatalog();
+      if(mode==='song'&&songId===id)changeMode('song',id,songs[id].group);
+      toast('기본 제공곡을 복원했습니다.');openSongManager(returnGroup);
+    }catch(err){toast('기본곡 복원 실패: '+err.message);}
+  }
+  function openScoreEditor(){if(mode==='song')openSongForm(songId);}
+  $('editScoreBtn').onclick=openScoreEditor;
+  function openScoreViewer(){
+    if(mode!=='song')return;
+    const s=songs[songId];if(!s)return;
+    const status=s.scoreStatus==='exercise'?'⚠ 재생 가능한 계이름 악보가 아직 등록되지 않았습니다.':s.scoreStatus==='registered'?'✓ 이 기기에 직접 등록한 악보':'기존 곡 기반 간이 악보 (리듬 단순화)';
+    const ends=s.phraseEnds?.length?s.phraseEnds:Array.from({length:Math.ceil(s.notes.length/4)},(_,i)=>Math.min(s.notes.length-1,i*4+3));
+    let begin=0;
+    const lines=ends.map(end=>{
+      const values=s.notes.slice(begin,end+1).map((n,i)=>`${noteName(n)}(${s.beats[begin+i]})`);
+      begin=end+1;
+      return `<div class="note-score-line">${values.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>`;
+    });
+    const copyText=s.notes.map((n,i)=>`${n}:${s.beats[i]}`).join(' ');
+    const duration=s.beats.reduce((x,y)=>x+y,0)*60/s.bpm;
+    modal(`<h2>🎼 ${escapeHtml(s.title)} · 계이름과 음 길이</h2>
+      <p class="score-view-status">${escapeHtml(status)}</p>
+      <p>BPM ${s.bpm} · ${s.notes.length}개 음 · 총 ${s.beats.reduce((x,y)=>x+y,0)}박 · 약 ${duration.toFixed(1)}초</p>
+      <p>표기: 도(1) = 1박, 미(0.5) = 반 박, 솔(2) = 2박. 아래 구간은 정식 악보의 마디와 다를 수 있습니다.</p>
+      <div class="note-score-grid">${s.scoreStatus==='exercise'&&!s.notes.length?'<p>등록된 계이름이 없습니다. 곡 수정을 눌러 입력하세요.</p>':lines.join('')}</div>
+      <div class="modal-buttons"><button id="copyScoreText" class="modal-button">📋 음표·박자 데이터 복사</button>
+      <button id="editScoreFromViewer" class="modal-button primary">✏️ 노래·계이름 수정</button><button id="closeScoreViewer" class="modal-button">닫기</button></div>`);
+    $('copyScoreText').onclick=async()=>{try{await navigator.clipboard.writeText(copyText);toast('전체 음표와 길이를 복사했습니다.');}catch(e){toast('복사 불가: 브라우저 클립보드 권한을 확인하세요.');}};
+    $('editScoreFromViewer').onclick=openScoreEditor;
+    $('closeScoreViewer').onclick=closeModal;
+  }
+  $('viewScoreBtn').onclick=openScoreViewer;
+
+  function randomPractice(){const note=WHITE[Math.floor(Math.random()*WHITE.length)];practice.target=note[0];$('practiceTarget').textContent=note[1];}
+  function resetPractice(){practice={hits:0,tries:0,target:'G4',locked:false};randomPractice();$('practiceBar').style.width='0%';$('highScore').textContent='정답 0 / 10';feedback('다음 계이름에 맞는 건반을 연주해 보세요.');}
+  $('nextPractice').onclick=()=>{practice.locked=false;randomPractice();feedback('🎯 새로운 계이름을 찾아보세요.');};
+  function grade(score){if(score>=90)return ['🏆 피아노 마스터!','환상적인 연주예요!',3];if(score>=70)return ['🌟 멋진 연주자!','정말 잘했어요!',2];if(score>=50)return ['🎵 성장하는 연주자!','다시 한번 도전해 보세요!',1];return ['💗 용기 있는 도전자!','도전 자체가 멋져요!',1];}
+  function result({score,title,extra},again,take){const [rank,msg,stars]=grade(score);
+    modal(`<h2>${escapeHtml(title)}</h2><div class="score-stars">${'⭐'.repeat(stars)}</div><div class="score-num">${score}점</div><div class="score-title">${rank}</div><p style="text-align:center">${msg}<br>${escapeHtml(extra)}</p><div class="modal-buttons"><button class="modal-button primary" id="again">🔁 다시 도전</button>${take?'<button class="modal-button" id="saveTake">💾 연주 저장·공유</button>':''}<button class="modal-button" id="okay">확인</button></div>`);
+    $('again').onclick=()=>{closeModal();again();};$('okay').onclick=closeModal;
+    if(take)$('saveTake').onclick=()=>savePrompt(take);
+  }
+  function judge(note,id,now){
+    if(mode==='practice'){
+      if(practice.locked)return;practice.tries++;
+      if(note!==practice.target){feedback('다른 건반이에요. 다시 찾아보세요.','error');return;}
+      practice.locked=true;practice.hits++;$('highScore').textContent='정답 '+practice.hits+' / 10';$('practiceBar').style.width=(practice.hits*10)+'%';
+      feedback('🎉 정답! '+noteName(note),'success');
+      if(practice.hits>=10){const score=Math.round(100*10/practice.tries);result({score,title:'계이름 연습 완료!',extra:`총 ${practice.tries}번 시도`},resetPractice);return;}
+      if($('autoPractice').checked)later(()=>{if(mode==='practice'){practice.locked=false;randomPractice();}},690);
+    }else if(mode==='song'&&challenge?.running){
+      const ch=challenge,s=ch.song,expected=s.notes[ch.index];
+      if(note!==expected){ch.wrongs++;ch.combo=0;$('comboText').textContent='콤보 0';feedback(`지금은 ${noteName(expected)} 건반입니다.`,'error');return;}
+      const lateness=Math.abs(now-ch.startedAt-songPositionMs(s,ch.index)),entry={started:now,durationMs:0,expectedMs:s.beats[ch.index]*beatMs(s),lateness};
+      ch.hits.push(entry);ch.byInput.set(id,entry);ch.index++;ch.combo++;ch.longest=Math.max(ch.longest,ch.combo);
+      $('progressText').textContent=ch.index+' / '+s.notes.length+'음';$('comboText').textContent='🔥 콤보 '+ch.combo;
+      $('songBar').style.width=(ch.index/s.notes.length*100)+'%';$('liveScore').textContent='✅ '+ch.index+'개 성공';
+      ribbon(ch.index);feedback(ch.combo>=5?`🔥 ${ch.combo}연속 성공!`:'좋아요! 다음 건반으로 이어가세요.','success');
+      if(ch.index>=s.notes.length)finishTimer=later(finishChallenge,1600);
+    }
+  }
+  function beatMs(s){return 60000/s.bpm/Number($('speed').value);}
+  function songPositionMs(s,idx){let n=0;for(let i=0;i<idx;i++)n+=s.beats[i];return n*beatMs(s);}
+  function ribbon(index){const s=songs[songId];if(!s)return;
+    const first=clamp(index-3,0,Math.max(0,s.notes.length-10));
+    $('noteRibbon').innerHTML=s.notes.slice(first,first+10).map((note,i)=>{
+      const k=first+i,c=k<index?'done':k===index?'current':'';
+      return `<span class="note-chip ${c}" title="${note}">${escapeHtml(noteName(note))}</span>`;
+    }).join('');
+  }
+  function resetSong(){const s=songs[songId];if(!s)return;
+    $('highScore').textContent='최고 '+Number(readStorage(bestKeyFor(s),'0'))+'점';
+    $('progressText').textContent='0 / '+s.notes.length+'음';$('comboText').textContent='콤보 0';$('liveScore').textContent='도전 준비';
+    $('songBar').style.width='0%';$('challengeBtn').textContent='🎯 도전 시작';ribbon(0);
+    feedback(s.scoreStatus==='exercise'?`⛔ ${s.title} 악보가 없습니다. ✏️ 곡 수정 후 미리듣기 가능`:`🎼 ${s.title} · 미리듣기 또는 도전 시작을 선택하세요.`);
+    updateSongAvailability();
+  }
+  function updateSongAvailability(){
+    if(mode!=='song')return;
+    const missing=songs[songId]?.scoreStatus==='exercise';
+    $('previewBtn').disabled=missing;
+    $('challengeBtn').disabled=missing;
+    if(!previewing)$('previewBtn').textContent=missing?'🎼 악보 등록 후 듣기':'▶ 미리듣기';
+    if(!challenge?.running)$('challengeBtn').textContent=missing?'🎼 악보 등록 후 도전':'🎯 도전 시작';
+  }
+  function scoreSong(ch){const s=ch.song;
+    const accuracy=Math.max(0,1-ch.wrongs/(s.notes.length+ch.wrongs));
+    if(ch.difficulty==='easy')return Math.round(100*accuracy);
+    const timing=ch.hits.reduce((sum,h)=>sum+Math.max(0,1-h.lateness/Math.max(450,beatMs(s))),0)/Math.max(1,ch.hits.length);
+    const lengths=ch.hits.reduce((sum,h)=>sum+Math.max(0,1-Math.abs(h.durationMs-h.expectedMs)/Math.max(450,h.expectedMs)),0)/Math.max(1,ch.hits.length);
+    return Math.round(clamp(60*accuracy+25*timing+15*lengths,0,100));
+  }
+  function finishChallenge(){const ch=challenge;if(!ch?.running)return;
+    ch.running=false;clearTimeout(finishTimer);finishTimer=null;
+    const score=scoreSong(ch),highKey=bestKeyFor(ch.song),old=Number(readStorage(highKey,'0'))||0,newRecord=score>old;
+    if(newRecord)writeStorage(highKey,score);
+    $('highScore').textContent='최고 '+Math.max(old,score)+'점';$('liveScore').textContent=score+'점';$('challengeBtn').textContent='↻ 다시 도전';
+    const take=recording?.kind==='song'?stopRecord(false):null;if(take)take.score=score;
+    feedback(newRecord?'🎊 최고 점수를 갱신했어요!':'👏 연주를 완성했어요!','success');
+    result({score,title:ch.song.title+(ch.song.scoreStatus==='exercise'?' · 창작 연습 선율':'')+' 연주 완료!',extra:newRecord?'🎊 새로운 최고 기록!':`최고 점수 ${old}점 · 콤보 ${ch.longest}`},()=>{changeMode('song',ch.song.id,category);},take);
+  }
+  $('challengeBtn').onclick=async()=>{
+    const s=songs[songId];if(!s)return;
+    if(s.scoreStatus==='exercise'){toast('해당 곡의 계이름 악보를 먼저 등록해 주세요.');return;}
+    try{await audio.ensure();}catch(e){toast(e.message);return;}
+    if(recording)stopRecord(false);clearTimers();releaseAll();stopDemo();resetSong();
+    const id=songId;let countdown=3;
+    challenge={song:s,index:0,wrongs:0,combo:0,longest:0,hits:[],byInput:new Map(),difficulty:$('difficulty').value,running:false,startedAt:0};
+    $('challengeBtn').disabled=true;
+    const count=()=>{
+      if(songId!==id||mode!=='song')return;
+      if(countdown>0){
+        feedback(`⏳ ${countdown}초 후 시작합니다.`);countdown--;
+        later(count,1000);
+      }else{
+        challenge.startedAt=performance.now();challenge.running=true;$('challengeBtn').disabled=false;$('challengeBtn').textContent='↻ 다시 시작';
+        if(recordSongs)beginRecord('song',s.title+' 연주');
+        feedback('🎵 시작! '+noteName(s.notes[0])+' 건반을 눌러 주세요.','success');
+      }
+    };count();
+  };
+  function stopDemo(){previewing=false;$('previewBtn').textContent='▶ 미리듣기';releaseAll();}
+  $('previewBtn').onclick=async()=>{
+    if(previewing){clearTimers();stopDemo();resetSong();return;}
+    const s=songs[songId];
+    if(s.scoreStatus==='exercise'){toast('해당 곡의 계이름 악보를 먼저 등록해 주세요.');return;}
+    try{await audio.ensure();}catch(e){toast(e.message);return;}
+    if(recording?.kind==='song')stopRecord(false);
+    clearTimers();releaseAll();challenge=null;previewing=true;const originalId=songId;
+    $('previewBtn').textContent='■ 시범 중지';$('challengeBtn').disabled=true;
+    let delay=0;s.notes.forEach((note,i)=>{
+      const voice='demo:'+i,duration=s.beats[i]*beatMs(s);
+      later(()=>{if(previewing&&songId===originalId&&mode==='song'){press(note,voice,'demo');ribbon(i);}},delay);
+      later(()=>release(voice),delay+duration*.94);delay+=duration;
+    });
+    later(()=>{previewing=false;$('previewBtn').textContent='▶ 미리듣기';$('challengeBtn').disabled=false;resetSong();},delay+200);
+  };
+  $('songRecBtn').onclick=()=>{if(challenge?.running){toast('다음 도전부터 새 녹음 설정이 적용됩니다.');return;}
+    recordSongs=!recordSongs;writeStorage('amp-song-record',recordSongs);updateHeader();};
+
+  // Local recording: we save the note events, not webcam or microphone frames.
+  function beginRecord(kind,title){if(recording)stopRecord(false);
+    recording={kind,title,startedAt:performance.now(),events:[],active:new Map()};
+    if(kind==='song')$('recordIndicator').classList.remove('hidden');
+    if(kind==='free'){$('recordDot').classList.add('recording');$('freeRecBtn').textContent='■ 녹음 종료';$('recordTime').textContent='00:00';}
+    recordTimer=setInterval(()=>{
+      if(!recording)return;const elapsed=(performance.now()-recording.startedAt)/1000;
+      if(kind==='song')$('songRecordTime').textContent=fmt(elapsed);else $('recordTime').textContent=fmt(elapsed);
+      const cap=kind==='song'?MAX_SONG_RECORD_SECONDS:MAX_FREE_RECORD_SECONDS;
+      if(elapsed>=cap){if(kind==='song'&&challenge?.running)finishChallenge();else stopRecord(true);}
+    },150);
+  }
+  function stopRecord(prompt){if(!recording)return null;
+    const r=recording,duration=clamp((performance.now()-r.startedAt)/1000,.12,r.kind==='song'?MAX_SONG_RECORD_SECONDS:MAX_FREE_RECORD_SECONDS);
+    for(const ev of r.active.values()){ev.duration=clamp(duration-ev.start,.08,10);r.events.push(ev);}
+    recording=null;clearInterval(recordTimer);recordTimer=null;
+    $('recordIndicator').classList.add('hidden');$('recordDot').classList.remove('recording');$('freeRecBtn').textContent='● 녹음 시작';
+    if(!r.events.length){if(prompt)toast('녹음된 음이 없습니다.');return null;}
+    const take={id:crypto.randomUUID?.()||Date.now().toString(36),title:r.title,createdAt:new Date().toISOString(),duration,events:r.events.sort((a,b)=>a.start-b.start),kind:r.kind};
+    if(prompt)savePrompt(take);
+    return take;
+  }
+  $('freeRecBtn').onclick=async()=>{if(recording){stopRecord(true);return;}try{await audio.ensure();beginRecord('free','나의 피아노 연주');feedback('🔴 녹음 중입니다.');}catch(e){toast(e.message);}};
+
+  const DB='ai-motion-piano-v4';
+  async function withDB(mode,fn){return new Promise((resolve,reject)=>{
+    const open=indexedDB.open(DB,1);open.onupgradeneeded=()=>{if(!open.result.objectStoreNames.contains('tracks'))open.result.createObjectStore('tracks',{keyPath:'id'});};
+    open.onerror=()=>reject(open.error);open.onsuccess=()=>{
+      const db=open.result,tx=db.transaction('tracks',mode),store=tx.objectStore('tracks');let req;
+      try{req=fn(store);}catch(e){db.close();reject(e);return;}
+      req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);tx.oncomplete=()=>db.close();
+    };
+  });}
+  const putTrack=x=>withDB('readwrite',s=>s.put(x)),getTracks=()=>withDB('readonly',s=>s.getAll()),getTrack=id=>withDB('readonly',s=>s.get(id)),deleteTrack=id=>withDB('readwrite',s=>s.delete(id));
+  function savePrompt(take){modal(`<h2>🎵 연주 저장</h2><p>${take.events.length}개 음 · ${fmt(take.duration)} · WAV 다운로드와 QR 공유도 가능합니다.</p><label class="field">곡 제목<input id="takeTitle" maxlength="50" value="${escapeHtml(take.title)}"></label><div class="modal-buttons"><button class="modal-button primary" id="saveRecording">💾 보관함에 저장</button><button class="modal-button" id="cancelRecording">취소</button></div>`);
+    $('saveRecording').onclick=async()=>{take.title=$('takeTitle').value.trim()||'나의 연주';try{await putTrack(take);trackModal(take);toast('연주를 저장했습니다.');}catch(e){toast('저장 오류: '+e.message);}};
+    $('cancelRecording').onclick=closeModal;
+  }
+  function trackModal(take){modal(`<h2>🎼 ${escapeHtml(take.title)}</h2><p>연주 ${fmt(take.duration)} · ${take.events.length}개 음${take.score!=null?' · '+take.score+'점':''}</p><div class="modal-buttons"><button class="modal-button" id="trackPlay">▶ 다시 듣기</button><button class="modal-button primary" id="trackWav">↓ WAV 다운로드</button><button class="modal-button" id="trackQR">▦ QR 공유</button><button class="modal-button" id="trackLibrary">보관함</button></div>`);
+    $('trackPlay').onclick=()=>playTrack(take);$('trackWav').onclick=()=>downloadTrack(take);$('trackQR').onclick=()=>shareTrack(take);$('trackLibrary').onclick=openLibrary;
+  }
+  async function playTrack(take){try{await audio.ensure();}catch(e){toast(e.message);return;}
+    if(challenge?.running)challenge.running=false;
+    if(recording?.kind==='song')stopRecord(false);
+    clearTimers();releaseAll();let last=0;
+    take.events.forEach((ev,i)=>{const id='saved:'+i;later(()=>press(ev.note,id,'playback'),ev.start*1000);later(()=>release(id),(ev.start+ev.duration)*1000);last=Math.max(last,ev.start+ev.duration);});
+    toast('🎵 저장된 연주를 다시 듣습니다.');
+  }
+  const wavBlob=async take=>{await audio.ensure();return audio.wav(take.events,take.duration);};
+  function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),15000);}
+  async function downloadTrack(take){try{toast('WAV 파일을 생성하고 있습니다.');downloadBlob(await wavBlob(take),(take.title.replace(/[\\/:*?"<>|]/g,'_')||'piano')+'.wav');}catch(e){toast(e.message);}}
+  async function openLibrary(){try{
+      const tracks=(await getTracks()).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+      modal(`<h2>▤ 나의 연주 보관함</h2><p>이 기기에 저장된 연주입니다. 다른 휴대폰에서 듣게 하려면 QR 공유 서버 설정이 필요합니다.</p><div class="recordings">${tracks.length?tracks.map(t=>`<div class="recording-row"><div class="record-details"><strong>${escapeHtml(t.title)}</strong><small>${fmt(t.duration)} · ${t.score!=null?t.score+'점 · ':''}${escapeHtml(new Date(t.createdAt).toLocaleString('ko-KR'))}</small></div><button class="modal-button" data-open="${t.id}">열기</button><button class="modal-button" data-delete="${t.id}">삭제</button></div>`).join(''):'<p>저장된 연주가 없습니다.</p>'}</div>`);
+      $('modalBody').querySelectorAll('[data-open]').forEach(b=>b.onclick=async()=>{const t=await getTrack(b.dataset.open);if(t)trackModal(t);});
+      $('modalBody').querySelectorAll('[data-delete]').forEach(b=>b.onclick=async()=>{if(confirm('이 녹음을 삭제할까요?')){await deleteTrack(b.dataset.delete);openLibrary();}});
+    }catch(e){toast('보관함 사용 실패: '+e.message);}}
+  $('freeLibrary').onclick=openLibrary;$('songLibrary').onclick=openLibrary;
+  async function loadTurnstile(){if(window.turnstile)return;
+    await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.onload=res;s.onerror=()=>rej(Error('보안 인증 로딩 실패'));document.head.appendChild(s);});}
+  async function shareTrack(take){if(!config.shareApiBase||!config.turnstileSiteKey){
+      modal('<h2>▦ QR 공유 설정 안내</h2><p>다른 휴대폰에서 실제 WAV 음원을 듣기 위해서는 온라인 저장소 연결이 필요합니다. 전체 코드에 포함된 <b>share-worker</b>를 배포하고 config.js에 Worker 주소와 Turnstile 공개 키를 입력하세요.</p><div class="modal-buttons"><button id="downloadWithoutShare" class="modal-button primary">↓ WAV 다운로드</button></div>');
+      $('downloadWithoutShare').onclick=()=>downloadTrack(take);return;}
+    modal(`<h2>▦ ${escapeHtml(take.title)} 공유</h2><p>녹음 파일을 업로드해 72시간 유효한 공유 QR을 만듭니다. 링크를 가진 사람은 누구나 듣고 다운로드할 수 있습니다.</p><div id="turnstileContainer" style="display:grid;place-items:center;min-height:80px"></div><div class="modal-buttons"><button class="modal-button primary" id="uploadBtn" disabled>QR 코드 만들기</button></div><p id="uploadStatus">보안 확인을 완료해 주세요.</p>`);
+    try{await loadTurnstile();if(!$('turnstileContainer'))return;
+      window.turnstile.render('#turnstileContainer',{sitekey:config.turnstileSiteKey,callback:token=>{if($('uploadBtn')){$('uploadBtn').disabled=false;$('uploadBtn').dataset.token=token;}},'expired-callback':()=>{if($('uploadBtn'))$('uploadBtn').disabled=true;}});
+      $('uploadBtn').onclick=async e=>{const b=e.currentTarget;b.disabled=true;$('uploadStatus').textContent='WAV 파일 업로드 중...';
+        try{const blob=await wavBlob(take),base=config.shareApiBase.replace(/\/$/,'');
+          const res=await fetch(base+'/api/share',{method:'POST',headers:{'Content-Type':'audio/wav','X-Turnstile-Token':b.dataset.token,'X-Track-Title':encodeURIComponent(take.title)},body:blob});
+          const j=await res.json();if(!res.ok||!/^https:\/\//.test(j.url))throw Error(j.error||'공유 실패');
+          modal(`<h2>🎉 QR 공유 준비 완료</h2><p>휴대폰 카메라로 스캔하여 연주를 재생하거나 WAV 파일을 다운로드하세요. 72시간 동안 유효합니다.</p><div class="qr-box"><div id="qrHolder" class="qr-holder"></div><a id="qrLink" href="${escapeHtml(j.url)}" target="_blank" rel="noopener noreferrer">공유 페이지 열기 ↗</a></div><div class="modal-buttons"><button class="modal-button primary" id="copyLink">링크 복사</button></div>`);
+          if(window.QRCode)new window.QRCode($('qrHolder'),{text:j.url,width:210,height:210});else $('qrHolder').textContent='QR 생성 라이브러리가 필요합니다.';
+          $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(j.url);toast('공유 링크를 복사했습니다.');}catch{toast('링크를 길게 눌러 복사해 주세요.');}};
+        }catch(ex){if($('uploadStatus'))$('uploadStatus').textContent='업로드 오류: '+ex.message;toast(ex.message);}
+      };
+    }catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;}
+  }
+
+  // Settings & initial view
+  const showSettings=open=>{$('settings').classList.toggle('hidden',!open);$('settingsBtn').setAttribute('aria-expanded',String(open));};
+  $('settingsBtn').onclick=()=>showSettings($('settings').classList.contains('hidden'));
+  $('closeSettings').onclick=()=>showSettings(false);
+  document.addEventListener('pointerdown',e=>{if(!$('settings').classList.contains('hidden')&&!$('settings').contains(e.target)&&!$('settingsBtn').contains(e.target))showSettings(false);});
+
+  // MediaPipe: 21 landmarks per hand. Only the fingertip location appears over
+  // the video; no raw webcam frames are uploaded or stored.
+  const hands=Array.from({length:2},(_,i)=>({id:'hand:'+i,closed:false,active:null,candidate:null,candidateSince:0,missingSince:0}));
+  function resetHandInputs(){for(const h of hands){release(h.id);h.closed=false;h.active=null;h.candidate=null;h.candidateSince=0;h.missingSince=0;}}
+  function pxFromLandmark(l){
+    const video=$('cameraVideo'),r=video.getBoundingClientRect(),stage=$('arApp').getBoundingClientRect();
+    const vw=video.videoWidth||640,vh=video.videoHeight||360,scale=Math.max(r.width/vw,r.height/vh);
+    const sw=vw*scale,sh=vh*scale;
+    return {x:r.left-stage.left+(1-l.x)*sw-(sw-r.width)/2,y:r.top-stage.top+l.y*sh-(sh-r.height)/2};
+  }
+  function hitKey(point){
+    const stage=$('arApp').getBoundingClientRect();const sx=stage.left+point.x,sy=stage.top+point.y;
+    const kb=$('keyboard').getBoundingClientRect();if(sx<kb.left||sx>=kb.right||sy<kb.top||sy>=kb.bottom)return null;
+    for(const [note] of BLACK){const r=keyEls.get(note).getBoundingClientRect();
+      if(sy>=r.top&&sy<r.bottom){const band=Math.min(10,Math.max(4,r.width*.15));
+        if(sx>=r.left-band&&sx<r.right+band){const margin=Math.min(3,Math.max(1,r.width*.04));
+          return sx>=r.left+margin&&sx<r.right-margin&&sy<r.bottom-4?note:null;
+        }
+      }
+    }
+    for(const [note] of WHITE){const r=keyEls.get(note).getBoundingClientRect();
+      if(sx>=r.left+2&&sx<r.right-2&&sy>=r.top&&sy<r.bottom)return note;
+    }
+    return null;
+  }
+  const fingerDist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  const debounceMs=()=> $('reaction').value==='fast'?18:45;
+  const switchMs=()=> $('reaction').value==='fast'?65:95;
+  const gapMs=()=> $('reaction').value==='fast'?115:165;
+  async function noteByHand(key,h){
+    // If the player crosses keys while a previous AudioContext operation is
+    // pending, generation numbers inside press/release discard outdated notes.
+    release(h.id);
+    h.active=key;
+    const played=await press(key,h.id,'user');
+    if(!played&&h.active===key){h.active=null;h.candidate=null;}
+  }
+  function evaluateHand(h,landmarks,now){
+    const tip=landmarks[8],middle=landmarks[12],thumb=landmarks[4];
+    if(!tip||!middle||!thumb){resetOneHand(h);return null;}
+    const point=pxFromLandmark(tip),key=hitKey(point),mode=$('gestureMode').value;
+    if(h.candidate!==key){h.candidate=key;h.candidateSince=now;}
+    let closed=false;
+    if(mode==='hover')closed=true;
+    else{
+      const other=mode==='middle'?middle:thumb;
+      const palm=Math.max(.075,fingerDist(landmarks[0],landmarks[9]));
+      const ratio=fingerDist(tip,other)/palm;
+      const closedAt=mode==='middle'?.38:.52,reopenAt=mode==='middle'?.62:.83;
+      closed=h.closed?ratio<reopenAt:ratio<closedAt;
+    }
+    if(!closed){
+      if(h.closed||h.active)release(h.id);
+      h.active=null;h.closed=false;h.missingSince=0;
+    }else{
+      h.closed=true;
+      if($('playStyle').value==='locked'){
+        if(!h.active&&key&&now-h.candidateSince>=debounceMs())noteByHand(key,h);
+      }else if(key){
+        h.missingSince=0;
+        if(key!==h.active && now-h.candidateSince>=(h.active?switchMs():mode==='hover'?250:debounceMs()))noteByHand(key,h);
+      }else if(h.active){
+        if(!h.missingSince)h.missingSince=now;
+        if(now-h.missingSince>=gapMs()){
+          release(h.id);h.active=null;h.missingSince=0;
+        }
+      }
+    }
+    return {point,key,closed,active:h.active};
+  }
+  function resetOneHand(h){release(h.id);h.closed=false;h.active=null;h.candidate=null;h.candidateSince=0;h.missingSince=0;}
+  function renderTracking(result,now){
+    const ls=result?.landmarks||[],board=$('handCursors');board.replaceChildren();
+    const canvas=$('cameraOverlay'),ctx=canvas.getContext('2d'),width=Math.floor(canvas.clientWidth),height=Math.floor(canvas.clientHeight);
+    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    $('handStatus').textContent=ls.length?`● 손 ${ls.length}개 인식 중`:'● 손을 보여주세요';$('handStatus').classList.toggle('warn',!ls.length);
+    ls.slice(0,2).forEach((lm,i)=>{
+      const result=evaluateHand(hands[i],lm,now);if(!result)return;
+      const dot=document.createElement('div');dot.className='finger-dot';dot.classList.toggle('closed',result.closed);dot.classList.toggle('on-key',!!result.key);
+      dot.style.left=result.point.x+'px';dot.style.top=result.point.y+'px';board.appendChild(dot);
+      if(i===0){const key=result.active||result.key;
+        $('handStatus').textContent=key?`● ${noteName(key)} ${result.active?'연주 중':result.closed?'입력 대기':'손가락 모으기'}`:result.closed?'● 모은 손을 건반으로 이동':'● 건반을 가리켜 주세요';
+      }
+    });
+    for(let i=ls.length;i<hands.length;i++)resetOneHand(hands[i]);
+  }
+  let stream=null,detector=null,cameraOn=false,frameHandle=0,lastVideoFrame=-1,lastDetectionAt=0;
+  async function loadDetector(){if(detector)return detector;
+    const versions=['1.1.1','0.10.22-rc.20250304'];let lastError;
+    for(const version of versions){
+      try{
+        const root='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@'+version;
+        const {HandLandmarker,FilesetResolver}=await import(root+'/+esm');
+        const fileset=await FilesetResolver.forVisionTasks(root+'/wasm');
+        const options={baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:'GPU'},runningMode:'VIDEO',numHands:2,minHandDetectionConfidence:.5,minHandPresenceConfidence:.45,minTrackingConfidence:.45};
+        try{detector=await HandLandmarker.createFromOptions(fileset,options);}
+        catch{options.baseOptions.delegate='CPU';detector=await HandLandmarker.createFromOptions(fileset,options);}
+        return detector;
+      }catch(e){lastError=e;console.warn('MediaPipe version unavailable',version,e);}
+    }
+    throw lastError||Error('손 인식 모델을 불러올 수 없습니다.');
+  }
+  function trackFrame(){if(!cameraOn)return;
+    const video=$('cameraVideo'),now=performance.now();
+    if(video.readyState>=2&&video.currentTime!==lastVideoFrame&&now-lastDetectionAt>55){
+      lastVideoFrame=video.currentTime;lastDetectionAt=now;
+      try{renderTracking(detector.detectForVideo(video,now),now);}catch(e){console.warn('손 인식 오류',e);}
+    }
+    frameHandle=requestAnimationFrame(trackFrame);
+  }
+  function stopCamera(){cameraOn=false;cancelAnimationFrame(frameHandle);stream?.getTracks().forEach(track=>track.stop());stream=null;
+    $('cameraVideo').srcObject=null;$('cameraPlaceholder').classList.remove('hidden');$('cameraBtn').textContent='📷 카메라 켜기';
+    $('handStatus').textContent='● 카메라 대기';$('handStatus').classList.add('warn');$('handCursors').replaceChildren();resetHandInputs();}
+  $('cameraBtn').onclick=async()=>{
+    if(cameraOn){stopCamera();return;}
+    const btn=$('cameraBtn');btn.disabled=true;btn.textContent='⏳ 카메라 연결 중';
+    try{
+      if(!navigator.mediaDevices?.getUserMedia)throw Error('HTTPS 또는 localhost에서 카메라를 실행해 주세요.');
+      stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:360}},audio:false});
+      $('cameraVideo').srcObject=stream;await $('cameraVideo').play();await loadDetector();
+      cameraOn=true;lastVideoFrame=-1;lastDetectionAt=0;
+      $('cameraPlaceholder').classList.add('hidden');btn.textContent='■ 카메라 끄기';trackFrame();toast('카메라 손 인식이 활성화되었습니다.');
+    }catch(e){stopCamera();toast('카메라 오류: '+e.message);}
+    finally{btn.disabled=false;}
+  };
+  $('gestureMode').onchange=()=>resetHandInputs();
+  $('playStyle').onchange=()=>{resetHandInputs();toast($('playStyle').value==='continuous'?'손가락을 모은 채 연속 연주할 수 있습니다.':'한 음을 누른 후 손가락을 벌려야 다음 음이 재생됩니다.');};
+  window.addEventListener('pagehide',()=>{stopCamera();releaseAll();clearTimers();clearInterval(recordTimer);});
+  updateHeader();resetPractice();
+  console.info('AI Motion Piano v8 ready: song library editing, add, soft-delete, restore, local backup and import.');
+})();
+
+</script>
+</body>
+</html>
